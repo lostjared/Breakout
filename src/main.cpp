@@ -1,0 +1,86 @@
+#include"intro.hpp"
+#include"start.hpp"
+#include"breakout.hpp"
+
+
+void Init(int width, int height);
+void Release();
+
+int main(int argc, char **argv) {
+    int width=1280;
+    int height=720;
+    
+    if(argc == 3) {
+        width = atoi(argv[1]);
+        height = atoi(argv[2]);
+        if(width < 0 || height < 0) {
+            std::cerr << "Invalid width/height\n";
+            exit(EXIT_FAILURE);
+        }
+    }
+    
+    Init(width, height);
+    game::_object = &intro::game_intro;
+    
+    
+    
+    SDL_Event e;
+    bool active = true;
+    
+    while(active) {
+        while(SDL_PollEvent(&e)) {
+            switch(e.type) {
+                case SDL_QUIT:
+                    active = false;
+                    break;
+                case SDL_KEYDOWN:
+                    if(e.key.keysym.sym == SDLK_ESCAPE) active = false;
+                    game::keydown_game(e.key.keysym.sym);
+                    break;
+                case SDL_KEYUP:
+                    game::keyup_game(e.key.keysym.sym);
+                    break;
+                    
+            }
+        }
+        game::render_game();
+    }
+    
+    Release();
+	return 0;
+}
+
+void Init(int width, int height) {
+    if(SDL_Init(SDL_INIT_VIDEO) < 0) {
+        std::cerr << "Error initalizing SDL: " << SDL_GetError() << "\n";
+        exit(EXIT_FAILURE);
+    }
+    game::window = SDL_CreateWindow("Breakout", 0, 0, width, height, SDL_WINDOW_SHOWN);
+    if(game::window == 0) {
+        std::cerr << "Error creating window: " << SDL_GetError() << "\n";
+        SDL_Quit();
+        exit(EXIT_FAILURE);
+    }
+    game::render = SDL_CreateRenderer(game::window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    if(game::render == 0) {
+        std::cerr << "Error creating renderer: " << SDL_GetError() << "\n";
+        SDL_Quit();
+        exit(EXIT_FAILURE);
+    }
+    game::tex = SDL_CreateTexture(game::render, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+    
+    game::front = SDL_CreateRGBSurfaceFrom(NULL, width, height, 32, 0, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+    
+    intro::game_intro.loadData();
+    breakout::game_breakout.loadData();
+    start::game_start.loadData();
+}
+
+
+void Release() {
+    SDL_DestroyRenderer(game::render);
+    SDL_DestroyTexture(game::tex);
+    SDL_DestroyWindow(game::window);
+    SDL_FreeSurface(game::front);
+    SDL_Quit();
+}
