@@ -15,12 +15,15 @@ namespace game {
         SDL_UnlockTexture(tex);
         
         // - copy
-        SDL_RenderCopy(render, tex, 0, 0);
+        
+        SDL_Rect dst = { 0,0,width,height };
+        
+        SDL_RenderCopy(render, tex, 0, &dst);
         // draw
         _object->draw();
         SDL_RenderPresent(render);
         
-        SDL_Delay(6);
+        SDL_Delay(25);
 	}
 
     void keydown_game(int key) {

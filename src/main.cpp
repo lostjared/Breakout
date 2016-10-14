@@ -2,24 +2,24 @@
 #include"start.hpp"
 #include"breakout.hpp"
 
+int game::width=1280;
+int game::height=720;
 
 void Init(int width, int height);
 void Release();
 
 int main(int argc, char **argv) {
-    int width=1280;
-    int height=720;
     
     if(argc == 3) {
-        width = atoi(argv[1]);
-        height = atoi(argv[2]);
-        if(width < 0 || height < 0) {
+        game::width = atoi(argv[1]);
+        game::height = atoi(argv[2]);
+        if(game::width < 0 || game::height < 0) {
             std::cerr << "Invalid width/height\n";
             exit(EXIT_FAILURE);
         }
     }
     
-    Init(width, height);
+    Init(game::width, game::height);
     game::_object = &intro::game_intro;
     
     
@@ -67,9 +67,9 @@ void Init(int width, int height) {
         SDL_Quit();
         exit(EXIT_FAILURE);
     }
-    game::tex = SDL_CreateTexture(game::render, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+    game::tex = SDL_CreateTexture(game::render, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, 1280, 720);
     
-    game::front = SDL_CreateRGBSurfaceFrom(NULL, width, height, 32, 0, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+    game::front = SDL_CreateRGBSurfaceFrom(NULL, 1280, 720, 32, 0, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
     
     intro::game_intro.loadData();
     breakout::game_breakout.loadData();

@@ -12,6 +12,8 @@ namespace game {
     extern SDL_Texture *tex;
     extern SDL_Surface *front;
     
+    extern int width, height;
+    
     void render_game();
     void keydown_game(int key);
     void keyup_game(int key);
