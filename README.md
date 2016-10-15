@@ -12,7 +12,9 @@ $ ./autogen.sh
 then
 
 $ mkdir build && cd build
+
 $ ../configure
+
 $ make
 
 to run the program from build directory use
