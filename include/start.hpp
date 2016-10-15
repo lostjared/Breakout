@@ -14,6 +14,9 @@ namespace start {
         virtual void update();
         virtual void keydown(int key);
         virtual void keyup(int key);
+    private:
+        SDL_Surface *text;
+        SDL_Color fnt_color;
     };
 
     extern Start game_start;
