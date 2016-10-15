@@ -97,7 +97,7 @@ am_Breakout_OBJECTS = main.$(OBJEXT) breakout.$(OBJEXT) \
 	intro.$(OBJEXT) game.$(OBJEXT) start.$(OBJEXT)
 Breakout_OBJECTS = $(am_Breakout_OBJECTS)
 am__DEPENDENCIES_1 =
-Breakout_DEPENDENCIES = $(am__DEPENDENCIES_1)
+Breakout_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -263,7 +263,7 @@ top_srcdir = @top_srcdir@
 AM_CXXFLAGS = -std=c++11 -O2 $(LIBSDL_CFLAGS) -I$(top_srcdir)/include -I$(prefix)/include
 AM_LDFLAGS = 
 Breakout_SOURCES = main.cpp breakout.cpp intro.cpp game.cpp start.cpp
-Breakout_LDADD = $(LIBSDL_LIBS) -lSDL2_ttf
+Breakout_LDADD = $(LIBSDL_LIBS) $(TTF_LIB)
 all: all-am
 
 .SUFFIXES:

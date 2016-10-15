@@ -84,7 +84,7 @@ void Init(int width, int height) {
     
     game::front = SDL_CreateRGBSurfaceFrom(NULL, 1280, 720, 32, 0, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
     
-    if(!TTF_Init()) {
+    if(TTF_Init() == -1) {
         std::cerr << "Error initalizing font library.\n";
         SDL_Quit();
         exit(EXIT_FAILURE);

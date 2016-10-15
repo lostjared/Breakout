@@ -5294,7 +5294,7 @@ done
 
 
 TTF_LIB="`pkg-config SDL2_ttf --libs` "
-TTF_LIB+=" `pkg-config freetype2 --libs` /usr/local/lib/libfreetype.a"
+TTF_LIB+=" `pkg-config freetype2 --libs`"
 
 
 
