@@ -15,12 +15,12 @@ namespace start {
         virtual void keydown(int key);
         virtual void keyup(int key);
     private:
-        SDL_Surface *text;
-        SDL_Color fnt_color;
-        SDL_Surface *title;
+        SDL_Surface *text, *title;
+        SDL_Color fnt_color, tcolor;
     };
 
     extern Start game_start;
+    extern TTF_Font *monaco;
 }
 
 #endif

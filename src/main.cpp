@@ -97,6 +97,12 @@ void Init(int width, int height) {
         SDL_Quit();
         exit(EXIT_FAILURE);
     }
+    start::monaco = TTF_OpenFont(game::appPath("monaco.ttf").c_str(), 110);
+    if(!start::monaco) {
+        std::cerr << "Error opening font: monaco.ttf\n";
+        SDL_Quit();
+        exit(EXIT_FAILURE);
+    }
     
     intro::game_intro.loadData();
     breakout::game_breakout.loadData();
@@ -106,6 +112,7 @@ void Init(int width, int height) {
 
 void Release() {
     TTF_CloseFont(game::game_font);
+    TTF_CloseFont(start::monaco);
     TTF_Quit();
     SDL_DestroyRenderer(game::render);
     SDL_DestroyTexture(game::tex);
