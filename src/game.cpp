@@ -8,19 +8,17 @@ namespace game {
 	SDL_Surface *front;
 
     GameObject *_object;
+    std::string path;
 
 	void render_game() {
         SDL_FillRect(front, 0, SDL_MapRGB(front->format, 0, 0, 0));
         SDL_LockTexture(tex, 0, &front->pixels, &front->pitch);
         SDL_UnlockTexture(tex);
-        
-        // - copy
-        
         SDL_Rect dst = { 0,0,width,height };
-        
         SDL_RenderCopy(render, tex, 0, &dst);
         // draw
         _object->draw();
+        
         SDL_RenderPresent(render);
         
         SDL_Delay(15);
@@ -36,6 +34,10 @@ namespace game {
     
     void setScreen(GameObject *obj) {
         _object = obj;
+    }
+    
+    std::string appPath(const std::string &p) {
+        return path+"/"+p;
     }
     
 }

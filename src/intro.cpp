@@ -17,14 +17,14 @@ namespace intro {
     
     void Intro::loadData() {
         
-        lostlogo = SDL_LoadBMP("img/lostlogo.bmp");
+        lostlogo = SDL_LoadBMP(game::appPath("img/lostlogo.bmp").c_str());
         if(!lostlogo) {
             std::cerr << "Error could not load image: img/lostlogo.bmp\n";
             SDL_Quit();
             exit(EXIT_FAILURE);
         }
         
-        jblogo = SDL_LoadBMP("img/jaredblogo.bmp");
+        jblogo = SDL_LoadBMP(game::appPath("img/jaredblogo.bmp").c_str());
         if(!jblogo) {
             std::cerr << "Error could not load image: img/jaredblogo.bmp\n";
             SDL_Quit();

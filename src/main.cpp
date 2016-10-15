@@ -10,13 +10,26 @@ void Release();
 
 int main(int argc, char **argv) {
     
-    if(argc == 3) {
+    if(argc == 4) {
+        game::width = atoi(argv[2]);
+        game::height = atoi(argv[3]);
+        if(game::width < 0 || game::height < 0) {
+            std::cerr << "Invalid width/height\n";
+            exit(EXIT_FAILURE);
+        }
+        game::path = argv[1];
+    }
+    else if(argc == 3) {
         game::width = atoi(argv[1]);
         game::height = atoi(argv[2]);
         if(game::width < 0 || game::height < 0) {
             std::cerr << "Invalid width/height\n";
             exit(EXIT_FAILURE);
         }
+    }
+    else if(argc != 1) {
+        std::cerr << "Invalid arguments..\n" << argv[0] << " path width height\n";
+        exit(EXIT_FAILURE);
     }
     
     Init(game::width, game::height);

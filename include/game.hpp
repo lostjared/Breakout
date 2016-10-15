@@ -3,6 +3,7 @@
 #include "SDL.h"
 #include<iostream>
 #include<string>
+#include<unistd.h>
 
 namespace game {
     
@@ -13,6 +14,7 @@ namespace game {
     extern SDL_Surface *front;
     
     extern int width, height;
+    extern std::string path;
     
     void render_game();
     void keydown_game(int key);
@@ -29,6 +31,7 @@ namespace game {
     
     extern GameObject *_object;
     void setScreen(GameObject *obj);
+    std::string appPath(const std::string &text);
 }
 
 
