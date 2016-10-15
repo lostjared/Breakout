@@ -63,7 +63,6 @@ namespace game {
     namespace gfx {
         
         void FadeBlend(SDL_Surface *bmp1, SDL_Surface *dst, float alpha) {
-            
             if((bmp1->w != dst->w) ||  (bmp1->h != dst->h)) {
                 std::cerr << "Invalid surface size..\n";
                 SDL_Quit();

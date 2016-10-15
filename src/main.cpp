@@ -88,7 +88,7 @@ void Init(int width, int height) {
         SDL_Quit();
         exit(EXIT_FAILURE);
     }
-    game::game_font = TTF_OpenFont(game::appPath("bold.ttf").c_str(), 14);
+    game::game_font = TTF_OpenFont(game::appPath("monaco.ttf").c_str(), 25);
     if(!game::game_font) {
         std::cerr << "Could not Open Font: " << TTF_GetError() << "\n";
         TTF_Quit();
