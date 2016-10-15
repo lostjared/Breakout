@@ -33,17 +33,35 @@ namespace start {
             exit(EXIT_FAILURE);
         }
 
-        bg = game::LoadBMP("img/gamebg.png");
+        bg = game::LoadBMP(game::appPath("img/bg.jpg"));
+        alpha = 0.0f;
 
     }
     
-    void Start::draw() {
+    void Start::BlendImage(SDL_Surface *src, SDL_Surface *dst) {
+    	game::gfx::FadeBlend(src, dst, alpha);
+    	static unsigned int direction = 0;
+    	if(direction == 0) {
+        	alpha += 0.05f;
+        	if(alpha >= 2.0f) {
+        		direction = 1;
+        	}
 
+    	}
+    	else if(direction == 1) {
+    		alpha -= 0.05f;
+    		if(alpha <= 1.0f) {
+    			direction = 0;
+    		}
+    	}
+    }
+
+    void Start::draw() {
+    	BlendImage(bg, game::front);
     	SDL_Rect pos1 = { (game::front->w/2)-(title->w/2), 0, title->w, title->h };
         SDL_BlitSurface(title, 0, game::front, &pos1);
         SDL_Rect pos = { 10, 10, text->w, text->h };
         SDL_BlitSurface(text, 0, game::front, &pos);
-        SDL_BlitSurface(bg, 0, game::front, 0);
     }
     
     void Start::update() {

@@ -6,7 +6,6 @@
 namespace breakout {
     class Breakout : public game::GameObject {
     public:
-        Breakout() = default;
         virtual ~Breakout();
         virtual void loadData();
         virtual void draw();

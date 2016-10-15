@@ -22,7 +22,7 @@ namespace game {
         
         SDL_RenderPresent(render);
         
-        SDL_Delay(10);
+        SDL_Delay(15);
     }
     
     void keydown_game(int key) {
@@ -44,7 +44,7 @@ namespace game {
     SDL_Surface *LoadBMP(const std::string &text) {
         SDL_Surface *bmp = IMG_Load(text.c_str());
         if(!bmp) {
-            std::cerr << "Error loading image: " << text << "\n";
+            std::cerr << "Error loading image: " << text << " " << IMG_GetError() << "\n";
             SDL_Quit();
             exit(EXIT_FAILURE);
         }
@@ -56,6 +56,7 @@ namespace game {
         }
         
         SDL_FreeSurface(bmp);
+        std::cout << "Successfully loaded image: " << text << "\n";
         return temp;
     }
     

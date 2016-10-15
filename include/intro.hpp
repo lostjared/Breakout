@@ -7,7 +7,6 @@ namespace intro {
     
     class Intro : public game::GameObject {
     public:
-        Intro() = default;
         virtual ~Intro();
         virtual void loadData();
         virtual void draw();
