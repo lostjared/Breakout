@@ -23,7 +23,7 @@ namespace game {
         _object->draw();
         SDL_RenderPresent(render);
         
-        SDL_Delay(25);
+        SDL_Delay(15);
 	}
 
     void keydown_game(int key) {
@@ -32,6 +32,10 @@ namespace game {
     
     void keyup_game(int key) {
         _object->keyup(key);
+    }
+    
+    void setScreen(GameObject *obj) {
+        _object = obj;
     }
     
 }

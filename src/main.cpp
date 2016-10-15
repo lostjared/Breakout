@@ -20,8 +20,8 @@ int main(int argc, char **argv) {
     }
     
     Init(game::width, game::height);
-    game::_object = &intro::game_intro;
-    
+    //game::_object = &intro::game_intro;
+    game::setScreen(&intro::game_intro);
     
     
     SDL_Event e;

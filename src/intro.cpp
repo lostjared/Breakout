@@ -55,7 +55,8 @@ namespace intro {
             if(cur-start_time > 3000) {
                 drawn_start = 0;
                 start_time = 0;
-                game::_object = &start::game_start;
+                //game::_object = &start::game_start;
+                game::setScreen(&start::game_start);
             }
         }
     }

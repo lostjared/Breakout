@@ -28,6 +28,7 @@ namespace game {
     };
     
     extern GameObject *_object;
+    void setScreen(GameObject *obj);
 }
 
 
