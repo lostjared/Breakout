@@ -22,7 +22,7 @@ namespace game {
         
         SDL_RenderPresent(render);
         
-        SDL_Delay(15);
+        SDL_Delay(10);
     }
     
     void keydown_game(int key) {
@@ -48,7 +48,6 @@ namespace game {
             SDL_Quit();
             exit(EXIT_FAILURE);
         }
-        
         SDL_Surface *temp = SDL_ConvertSurfaceFormat(bmp, front->format->format, 0);
         if(!temp) {
             std::cerr << "Error converting to Display Format..\n";
@@ -64,6 +63,7 @@ namespace game {
     namespace gfx {
         
         void FadeBlend(SDL_Surface *bmp1, SDL_Surface *dst, float alpha) {
+            
             if((bmp1->w != dst->w) ||  (bmp1->h != dst->h)) {
                 std::cerr << "Invalid surface size..\n";
                 SDL_Quit();
@@ -84,17 +84,16 @@ namespace game {
             }
             for(unsigned int i = 0; i < dst->w; ++i) {
                 for(unsigned int z = 0; z < dst->h; ++z) {
-                    unsigned int *buf1 = (unsigned int*)bmp1->pixels+(i+z*width);
-                    unsigned int *target = (unsigned int*)dst->pixels+(i+z*width);
+                    unsigned int *buf1 = (unsigned int*)bmp1->pixels+(i+z*bmp1->w);
+                    unsigned int *target = (unsigned int*)dst->pixels+(i+z*dst->w);
                     unsigned char *pix1 = (unsigned char*)buf1;
                     unsigned char rgb[3];
-                    rgb[0] = pix1[2] * alpha;
+                    rgb[0] = pix1[0] * alpha;
                     rgb[1] = pix1[1] * alpha;
-                    rgb[2] = pix1[0] * alpha;
-                    *target = SDL_MapRGB(dst->format, rgb[0], rgb[1], rgb[2]);
+                    rgb[2] = pix1[2] * alpha;
+                    *target = SDL_MapRGB(dst->format, rgb[2], rgb[1], rgb[0]);
                 }
             }
-            
             // stop
             if(SDL_MUSTLOCK(dst)) {
                 SDL_UnlockSurface(dst);

@@ -83,13 +83,11 @@ void Init(int width, int height) {
     game::tex = SDL_CreateTexture(game::render, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, 1280, 720);
     
     game::front = SDL_CreateRGBSurfaceFrom(NULL, 1280, 720, 32, 0, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
-    
     if(TTF_Init() == -1) {
         std::cerr << "Error initalizing font library.\n";
         SDL_Quit();
         exit(EXIT_FAILURE);
     }
-    
     game::game_font = TTF_OpenFont(game::appPath("bold.ttf").c_str(), 14);
     if(!game::game_font) {
         std::cerr << "Could not Open Font: " << TTF_GetError() << "\n";
@@ -100,10 +98,10 @@ void Init(int width, int height) {
     start::monaco = TTF_OpenFont(game::appPath("monaco.ttf").c_str(), 110);
     if(!start::monaco) {
         std::cerr << "Error opening font: monaco.ttf\n";
+        TTF_Quit();
         SDL_Quit();
         exit(EXIT_FAILURE);
     }
-    
     intro::game_intro.loadData();
     breakout::game_breakout.loadData();
     start::game_start.loadData();
