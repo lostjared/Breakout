@@ -41,4 +41,23 @@ namespace game {
         return path+"/"+p;
     }
     
+    SDL_Surface *LoadBMP(const std::string &text) {
+        SDL_Surface *bmp = SDL_LoadBMP(text.c_str());
+        if(!bmp) {
+            std::cerr << "Error loading image: " << text << "\n";
+            SDL_Quit();
+            exit(EXIT_FAILURE);
+        }
+        
+        SDL_Surface *temp = SDL_ConvertSurfaceFormat(bmp, front->format->format, 0);
+        if(!temp) {
+            std::cerr << "Error converting to Display Format..\n";
+            SDL_Quit();
+            exit(EXIT_FAILURE);
+        }
+        
+        SDL_FreeSurface(bmp);
+        return temp;
+    }
+    
 }

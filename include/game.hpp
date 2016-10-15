@@ -35,6 +35,7 @@ namespace game {
     extern GameObject *_object;
     void setScreen(GameObject *obj);
     std::string appPath(const std::string &text);
+    SDL_Surface *LoadBMP(const std::string &text);
 }
 
 

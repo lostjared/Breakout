@@ -17,6 +17,7 @@ namespace start {
     private:
         SDL_Surface *text;
         SDL_Color fnt_color;
+        SDL_Surface *title;
     };
 
     extern Start game_start;

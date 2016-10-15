@@ -7,7 +7,10 @@ namespace start {
     Start::~Start() {
         
         if(text != 0)
-        SDL_FreeSurface(text);
+            SDL_FreeSurface(text);
+        
+        if(title != 0)
+            SDL_FreeSurface(title);
     }
     
     void Start::loadData() {
@@ -19,10 +22,12 @@ namespace start {
             SDL_Quit();
             exit(EXIT_FAILURE);
         }
-        
+        title = game::LoadBMP(game::appPath("img/title.bmp"));
+        SDL_SetColorKey(title, SDL_TRUE, SDL_MapRGB(title->format, 0, 0, 0));
     }
     
     void Start::draw() {
+        SDL_BlitSurface(title, 0, game::front, 0);
         SDL_Rect pos = { 10, 10, text->w, text->h };
         SDL_BlitSurface(text, 0, game::front, &pos);
     }
