@@ -1,6 +1,7 @@
 #ifndef __GAME__H_
 #define __GAME__H_
 #include "SDL.h"
+#include "SDL_ttf.h"
 #include<iostream>
 #include<string>
 #include<unistd.h>
@@ -12,6 +13,8 @@ namespace game {
     
     extern SDL_Texture *tex;
     extern SDL_Surface *front;
+    
+    extern TTF_Font *game_font;
     
     extern int width, height;
     extern std::string path;

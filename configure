@@ -626,6 +626,7 @@ am__EXEEXT_TRUE
 LTLIBOBJS
 LIBSDL_LIBS
 LIBSDL_CFLAGS
+TTF_LIB
 LIBOBJS
 EGREP
 GREP
@@ -5292,6 +5293,10 @@ fi
 done
 
 
+TTF_LIB="`pkg-config SDL2_ttf --libs` "
+TTF_LIB+=" `pkg-config freetype2 --libs` /usr/local/lib/libfreetype.a"
+
+
 
 
 
@@ -5299,7 +5304,7 @@ done
 
 echo "SDL2 CFLAGS found: $LIBSDL_CFLAGS"
 echo "SDL2 LDFLAGS $LIBSDL_LIBS"
-
+echo "SDL2_TTF libs: $TTF_LIB"
 
 ac_config_files="$ac_config_files Makefile src/Makefile"
 

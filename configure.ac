@@ -98,14 +98,18 @@ AC_CHECK_TYPES([ptrdiff_t])
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([memset])
 
+TTF_LIB="`pkg-config SDL2_ttf --libs` "
+TTF_LIB+=" `pkg-config freetype2 --libs` /usr/local/lib/libfreetype.a"
 
+AC_SUBST(TTF_LIB)
 AC_SUBST(LIBSDL_CFLAGS)
 AC_SUBST(LIBSDL_LIBS)
 
 
+
 echo "SDL2 CFLAGS found: $LIBSDL_CFLAGS"
 echo "SDL2 LDFLAGS $LIBSDL_LIBS"
-
+echo "SDL2_TTF libs: $TTF_LIB"
 
 AC_OUTPUT(Makefile src/Makefile)
 

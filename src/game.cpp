@@ -6,6 +6,7 @@ namespace game {
 	SDL_Renderer *render;
 	SDL_Texture *tex;
 	SDL_Surface *front;
+    TTF_Font *game_font;
 
     GameObject *_object;
     std::string path;

@@ -203,6 +203,7 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
+TTF_LIB = @TTF_LIB@
 VERSION = @VERSION@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
@@ -262,7 +263,7 @@ top_srcdir = @top_srcdir@
 AM_CXXFLAGS = -std=c++11 -O2 $(LIBSDL_CFLAGS) -I$(top_srcdir)/include -I$(prefix)/include
 AM_LDFLAGS = 
 Breakout_SOURCES = main.cpp breakout.cpp intro.cpp game.cpp start.cpp
-Breakout_LDADD = $(LIBSDL_LIBS)
+Breakout_LDADD = $(LIBSDL_LIBS) -lSDL2_ttf
 all: all-am
 
 .SUFFIXES:
@@ -276,9 +277,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu src/Makefile
+	  $(AUTOMAKE) --foreign src/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
