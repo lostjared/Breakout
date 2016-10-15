@@ -90,6 +90,14 @@ void Init(int width, int height) {
         exit(EXIT_FAILURE);
     }
     
+    game::game_font = TTF_OpenFont(game::appPath("bold.ttf").c_str(), 14);
+    if(!game::game_font) {
+        std::cerr << "Could not Open Font: " << TTF_GetError() << "\n";
+        TTF_Quit();
+        SDL_Quit();
+        exit(EXIT_FAILURE);
+    }
+    
     intro::game_intro.loadData();
     breakout::game_breakout.loadData();
     start::game_start.loadData();
@@ -97,6 +105,7 @@ void Init(int width, int height) {
 
 
 void Release() {
+    TTF_CloseFont(game::game_font);
     TTF_Quit();
     SDL_DestroyRenderer(game::render);
     SDL_DestroyTexture(game::tex);
