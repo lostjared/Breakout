@@ -42,7 +42,7 @@ namespace game {
     }
     
     SDL_Surface *LoadBMP(const std::string &text) {
-        SDL_Surface *bmp = SDL_LoadBMP(text.c_str());
+        SDL_Surface *bmp = IMG_Load(text.c_str());
         if(!bmp) {
             std::cerr << "Error loading image: " << text << "\n";
             SDL_Quit();

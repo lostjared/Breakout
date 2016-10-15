@@ -16,6 +16,7 @@ namespace start {
         virtual void keyup(int key);
     private:
         SDL_Surface *text, *title;
+        SDL_Surface *bg;
         SDL_Color fnt_color, tcolor;
     };
 

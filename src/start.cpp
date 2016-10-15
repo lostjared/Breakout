@@ -32,13 +32,18 @@ namespace start {
             SDL_Quit();
             exit(EXIT_FAILURE);
         }
+
+        bg = game::LoadBMP("img/gamebg.png");
+
     }
     
     void Start::draw() {
-        SDL_Rect pos1 = { (game::front->w/2)-(title->w/2), 0, title->w, title->h };
+
+    	SDL_Rect pos1 = { (game::front->w/2)-(title->w/2), 0, title->w, title->h };
         SDL_BlitSurface(title, 0, game::front, &pos1);
         SDL_Rect pos = { 10, 10, text->w, text->h };
         SDL_BlitSurface(text, 0, game::front, &pos);
+        SDL_BlitSurface(bg, 0, game::front, 0);
     }
     
     void Start::update() {

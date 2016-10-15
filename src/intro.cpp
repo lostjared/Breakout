@@ -16,8 +16,8 @@ namespace intro {
     }
     
     void Intro::loadData() {
-        lostlogo = game::LoadBMP(game::appPath("img/lostlogo.bmp"));
-        jblogo = game::LoadBMP(game::appPath("img/jaredblogo.bmp"));
+        lostlogo = game::LoadBMP(game::appPath("img/lostlogo.png"));
+        jblogo = game::LoadBMP(game::appPath("img/jaredblogo.png"));
     }
     
     void Intro::draw() {
