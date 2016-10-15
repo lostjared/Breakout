@@ -1,17 +1,17 @@
 #include "game.hpp"
 
 namespace game {
-
-	SDL_Window *window;
-	SDL_Renderer *render;
-	SDL_Texture *tex;
-	SDL_Surface *front;
+    
+    SDL_Window *window;
+    SDL_Renderer *render;
+    SDL_Texture *tex;
+    SDL_Surface *front;
     TTF_Font *game_font;
-
+    
     GameObject *_object;
     std::string path;
-
-	void render_game() {
+    
+    void render_game() {
         SDL_FillRect(front, 0, SDL_MapRGB(front->format, 0, 0, 0));
         SDL_LockTexture(tex, 0, &front->pixels, &front->pitch);
         SDL_UnlockTexture(tex);
@@ -23,8 +23,8 @@ namespace game {
         SDL_RenderPresent(render);
         
         SDL_Delay(15);
-	}
-
+    }
+    
     void keydown_game(int key) {
         _object->keydown(key);
     }
