@@ -14,11 +14,13 @@ namespace start {
         virtual void keydown(int key);
         virtual void keyup(int key);
         void BlendImage(SDL_Surface *src, SDL_Surface *dst);
+        void enterPressed();
     private:
         SDL_Surface *text, *title;
-        SDL_Surface *bg;
+        SDL_Surface *bg,*_start,*about,*_exit;
         SDL_Color fnt_color, tcolor;
         float alpha;
+        int cursor_pos;
     };
 
     extern Start game_start;
