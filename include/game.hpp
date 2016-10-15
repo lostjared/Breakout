@@ -25,6 +25,7 @@ namespace game {
     
     class GameObject {
     public:
+    	virtual ~GameObject() {}
         virtual void loadData() = 0;
         virtual void draw() = 0;
         virtual void update() = 0;
