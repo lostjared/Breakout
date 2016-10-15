@@ -24,6 +24,7 @@ namespace intro {
         static int drawn_start = 0;
         static unsigned int start_time = 0;
         static float direction = 0.05f;
+        static const int wait_time = 2000;
         if(start_time == 0) {
             start_time = SDL_GetTicks();
             direction = 0.05f;
@@ -34,7 +35,7 @@ namespace intro {
             unsigned int cur = SDL_GetTicks();
             
             if(direction == 0.05f && alpha >= 1.0f) {
-                if(cur-start_time >= 1500) {
+                if(cur-start_time >= wait_time) {
                     start_time = SDL_GetTicks();
                     direction = -0.05f;
                 }
@@ -57,7 +58,7 @@ namespace intro {
             unsigned int cur = SDL_GetTicks();
             
             if(direction == 0.05f && alpha >= 1.0f) {
-                if(cur-start_time >= 1500) {
+                if(cur-start_time >= wait_time) {
                     start_time = SDL_GetTicks();
                     direction = -0.05f;
                 }
