@@ -23,28 +23,57 @@ namespace intro {
     void Intro::draw() {
         static int drawn_start = 0;
         static unsigned int start_time = 0;
-        
+        static float direction = 0.05f;
         if(start_time == 0) {
             start_time = SDL_GetTicks();
+            direction = 0.05f;
         }
     
         if(drawn_start == 0) {
-            SDL_BlitSurface(lostlogo, 0, game::front, 0);
+            static float alpha = 0.0f;
             unsigned int cur = SDL_GetTicks();
-            if(cur-start_time > 3000) {
+            
+            if(direction == 0.05f && alpha >= 1.0f) {
+                if(cur-start_time >= 1500) {
+                    start_time = SDL_GetTicks();
+                    direction = -0.05f;
+                }
+            }
+            else if (alpha <= 0 && direction == -0.05f) {
+                direction = 0.05f;
+                start_time = SDL_GetTicks();
                 drawn_start = 1;
+            }
+            else
+            if((cur-start_time) > 25) {
+                alpha += direction;
                 start_time = SDL_GetTicks();
             }
             
+            game::gfx::FadeBlend(lostlogo, game::front, alpha);
+            
         } else if(drawn_start == 1) {
-            SDL_BlitSurface(jblogo, 0, game::front, 0);
+            static float alpha = 0.0f;
             unsigned int cur = SDL_GetTicks();
-            if(cur-start_time > 3000) {
+            
+            if(direction == 0.05f && alpha >= 1.0f) {
+                if(cur-start_time >= 1500) {
+                    start_time = SDL_GetTicks();
+                    direction = -0.05f;
+                }
+            }
+            else if (alpha <= 0 && direction == -0.05f) {
+                direction = 0.05f;
+                start_time = SDL_GetTicks();
                 drawn_start = 0;
-                start_time = 0;
-                //game::_object = &start::game_start;
                 game::setScreen(&start::game_start);
             }
+            else
+            if((cur-start_time) > 25) {
+                alpha += direction;
+                start_time = SDL_GetTicks();
+        	}
+            game::gfx::FadeBlend(jblogo, game::front, alpha);
         }
     }
     

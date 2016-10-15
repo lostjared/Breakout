@@ -36,6 +36,10 @@ namespace game {
     void setScreen(GameObject *obj);
     std::string appPath(const std::string &text);
     SDL_Surface *LoadBMP(const std::string &text);
+    
+    namespace gfx {
+        void FadeBlend(SDL_Surface *bmp1, SDL_Surface *dst, float alpha);
+    }
 }
 
 
