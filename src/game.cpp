@@ -19,6 +19,7 @@ namespace game {
         SDL_RenderCopy(render, tex, 0, &dst);
         // draw
         _object->draw();
+        _object->update();
         
         SDL_RenderPresent(render);
         

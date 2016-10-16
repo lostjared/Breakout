@@ -17,6 +17,24 @@ namespace breakout {
 		bool visible;
 	};
 
+	enum class Direction { LEFT, RIGHT, UP, DOWN };
+
+	class Paddle {
+	public:
+		Paddle(int cx, int cy, int cw, int ch);
+		void move(Direction dir);
+	protected:
+		int x,y,w,h;
+
+	};
+
+	/*
+	class Grid {
+	public:
+		Grid();
+
+	};*/
+
     class Breakout : public game::GameObject {
     public:
         virtual ~Breakout();
