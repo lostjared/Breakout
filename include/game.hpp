@@ -41,6 +41,7 @@ namespace game {
     
     namespace gfx {
         void FadeBlend(SDL_Surface *bmp1, SDL_Surface *dst, float alpha);
+        void BlendWithFront(int x, int y, SDL_Surface *bmp1, SDL_Surface *dst, float alpha);
     }
 }
 

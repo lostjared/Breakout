@@ -103,6 +103,44 @@ namespace game {
                 SDL_UnlockSurface(bmp1);
             }
         }
+
+
+        void BlendWithFront(int x, int y, SDL_Surface *bmp1, SDL_Surface *dst, float alpha) {
+             if((bmp1->format->BitsPerPixel != 32)||(dst->format->BitsPerPixel != 32)) {
+                 std::cerr << "Invalid bpp.\n";
+                 SDL_Quit();
+                 exit(EXIT_FAILURE);
+             }
+             // start
+             if(SDL_MUSTLOCK(dst)) {
+                 SDL_LockSurface(dst);
+             }
+
+             if(SDL_MUSTLOCK(bmp1)) {
+                 SDL_LockSurface(bmp1);
+             }
+             for(unsigned int i = 0; i < bmp1->w; ++i) {
+                 for(unsigned int z = 0; z < bmp1->h; ++z) {
+                     unsigned int *buf1 = (unsigned int*)bmp1->pixels+(i+z*bmp1->w);
+                     unsigned int *target = (unsigned int*)dst->pixels+((x+i)+(z+y)*dst->w);
+                     unsigned char *pix1 = (unsigned char*)buf1;
+                     unsigned char *pix2 = (unsigned char*)target;
+                     unsigned char rgb[3];
+                     rgb[0] = pix2[0]+(pix1[0] * alpha);
+                     rgb[1] = pix2[1]+(pix1[1] * alpha);
+                     rgb[2] = pix2[2]+(pix1[2] * alpha);
+                     *target = SDL_MapRGB(dst->format, rgb[2], rgb[1], rgb[0]);
+                 }
+             }
+             // stop
+             if(SDL_MUSTLOCK(dst)) {
+                 SDL_UnlockSurface(dst);
+             }
+
+             if(SDL_MUSTLOCK(bmp1)) {
+                 SDL_UnlockSurface(bmp1);
+             }
+        }
     }
     
 }
