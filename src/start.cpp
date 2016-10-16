@@ -86,34 +86,34 @@ namespace start {
         		rct = exitPos;
         		break;
         	}
-
-        	SDL_FillRect(game::front, &startPos, SDL_MapRGB(game::front->format, rand()%255, rand()%255, rand()%255));
-        	SDL_FillRect(game::front, &aboutPos, SDL_MapRGB(game::front->format, rand()%255, rand()%255, rand()%255));
-        	SDL_FillRect(game::front, &exitPos, SDL_MapRGB(game::front->format, rand()%255, rand()%255, rand()%255));
-
-
         	rct.x -= 20;
         	rct.w += 40;
         	rct.y -= 20;
         	rct.h += 40;
-
         	SDL_FillRect(game::front, &rct, SDL_MapRGB(game::front->format, rand()%255, rand()%255, rand()%255));
-
         	static float alpha1 = 1.0f;
-
         	alpha1 += 0.01f;
         	if(alpha1 > 2) alpha1 = 1.0f;
-
-        	game::gfx::BlendWithFront(startPos.x, startPos.y, _start, game::front, alpha1);
-        	game::gfx::BlendWithFront(aboutPos.x, aboutPos.y, about, game::front, alpha1);
-        	game::gfx::BlendWithFront(exitPos.x, exitPos.y, _exit, game::front,alpha1);
+        	switch(cursor_pos) {
+        	case 0:
+        		game::gfx::BlendWithFront(startPos.x, startPos.y, _start, game::front, alpha1);
+        		SDL_BlitSurface(about, 0, game::front, &aboutPos);
+        		SDL_BlitSurface(_exit, 0, game::front, &exitPos);
+        		break;
+        	case 1:
+        		game::gfx::BlendWithFront(aboutPos.x, aboutPos.y, about, game::front, alpha1);
+        		SDL_BlitSurface(_start, 0, game::front, &startPos);
+        		SDL_BlitSurface(_exit, 0, game::front, &exitPos);
+        		break;
+        	case 2:
+        		game::gfx::BlendWithFront(exitPos.x, exitPos.y, _exit, game::front,alpha1);
+        		SDL_BlitSurface(_start, 0, game::front, &startPos);
+        		SDL_BlitSurface(about, 0, game::front, &aboutPos);
+        		break;
+        	}
         }
-
         SDL_Rect pos = { 10, 10, text->w, text->h };
         SDL_BlitSurface(text, 0, game::front, &pos);
-
-
-
     }
     
     void Start::update() {
