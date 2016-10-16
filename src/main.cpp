@@ -33,7 +33,6 @@ int main(int argc, char **argv) {
     }
     
     Init(game::width, game::height);
-    //game::_object = &intro::game_intro;
     game::setScreen(&intro::game_intro);
     
     
@@ -53,6 +52,10 @@ int main(int argc, char **argv) {
                 case SDL_KEYUP:
                     game::keyup_game(e.key.keysym.sym);
                     break;
+                case SDL_JOYBUTTONDOWN:
+                	break;
+                case SDL_JOYBUTTONUP:
+                	break;
                     
             }
         }
@@ -64,10 +67,15 @@ int main(int argc, char **argv) {
 }
 
 void Init(int width, int height) {
-    if(SDL_Init(SDL_INIT_VIDEO) < 0) {
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0) {
         std::cerr << "Error initalizing SDL: " << SDL_GetError() << "\n";
         exit(EXIT_FAILURE);
     }
+    std::cout << "SDL initialized..\n";
+    if(SDL_JoystickEventState(SDL_ENABLE) == 1) {
+    	std::cout << "Joystick Events Enabled..\n";
+    }
+
     game::window = SDL_CreateWindow("Breakout", 0, 0, width, height, SDL_WINDOW_SHOWN);
     if(game::window == 0) {
         std::cerr << "Error creating window: " << SDL_GetError() << "\n";

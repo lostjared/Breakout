@@ -23,7 +23,7 @@ namespace game {
         
         SDL_RenderPresent(render);
         
-        SDL_Delay(15);
+        SDL_Delay(10);
     }
     
     void keydown_game(int key) {
