@@ -49,7 +49,7 @@ namespace start {
     	static unsigned int direction = 0;
     	if(direction == 0) {
         	alpha += 0.05f;
-        	if(alpha >= 2.0f) {
+        	if(alpha >= 3.0f) {
         		direction = 1;
         	}
 

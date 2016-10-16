@@ -4,6 +4,19 @@
 #include"game.hpp"
 
 namespace breakout {
+
+	class Brick {
+	public:
+		Brick();
+		void setVisible(const bool &b);
+		bool isVisible() const;
+		int getType() const;
+		void setType(const int &b);
+	protected:
+		int brick_type;
+		bool visible;
+	};
+
     class Breakout : public game::GameObject {
     public:
         virtual ~Breakout();
