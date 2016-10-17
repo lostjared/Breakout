@@ -23,13 +23,16 @@ namespace breakout {
     	if(keys[SDL_SCANCODE_LEFT]) {
     		the_game.player.move(Direction::LEFT);
     	}
-    	else if(keys[SDL_SCANCODE_RIGHT]) {
+
+    	if(keys[SDL_SCANCODE_RIGHT]) {
     		the_game.player.move(Direction::RIGHT);
     	}
-    	else if(keys[SDL_SCANCODE_UP]) {
+
+    	if(keys[SDL_SCANCODE_UP]) {
     		the_game.player.move(Direction::UP);
     	}
-    	else if(keys[SDL_SCANCODE_DOWN]) {
+
+    	if(keys[SDL_SCANCODE_DOWN]) {
     		the_game.player.move(Direction::DOWN);
     	}
     }
@@ -121,7 +124,7 @@ namespace breakout {
 
     }
 
-    Game::Game() : player((1280/2)-75, 600, 150, 20), white(0x0) {
+    Game::Game() : player((1280/2)-75, 600, 150, 10), white(0x0) {
 
     }
 

@@ -1,5 +1,9 @@
 #ifndef __GAME__H_
 #define __GAME__H_
+
+// so i don't have to watch the intro a million times
+//#define DEBUG_MODE
+
 #include "SDL.h"
 #include "SDL_ttf.h"
 #include <SDL/SDL_image.h>

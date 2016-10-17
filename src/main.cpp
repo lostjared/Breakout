@@ -33,8 +33,11 @@ int main(int argc, char **argv) {
     }
     
     Init(game::width, game::height);
+#ifndef DEBUG_MODE
     game::setScreen(&intro::game_intro);
-    
+#else
+    game::setScreen(&breakout::game_breakout);
+#endif
     
     SDL_Event e;
     bool active = true;
