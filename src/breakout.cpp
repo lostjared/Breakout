@@ -5,15 +5,16 @@ namespace breakout {
     Breakout game_breakout;
     
     Breakout::~Breakout() {
-        
     }
     
     void Breakout::loadData() {
-        
+    	//SDL_SetColorKey(ball, SDL_TRUE, SDL_MapRGB(ball->format, 0, 0, 0));
+    	the_game.init();
     }
     
     void Breakout::draw() {
         the_game.draw();
+
     }
     
     void Breakout::update() {
@@ -78,6 +79,8 @@ namespace breakout {
     	case Direction::DOWN:
     		if(y < 720-h) y += PADDLE_SPEED;
     		break;
+    	default:
+    		break;
     	}
     }
 
@@ -88,18 +91,60 @@ namespace breakout {
     	rc->h = h;
     }
 
+    Ball::Ball() : x(0), y(0), w(0), h(0), dir(Direction::UP) {
+
+    }
+
+	void Ball::setBallRect(int cx, int cy, int cw, int ch) {
+		x = cx;
+		y = cy;
+		w = cw;
+		h = ch;
+	}
+
+	void Ball::setRect(SDL_Rect *rc) {
+		rc->x = x;
+		rc->y = y;
+		rc->w = w;
+		rc->h = h;
+	}
+
+	void Ball::setDirection(Direction d) {
+		dir = d;
+	}
+
+	void Ball::draw() {
+
+	}
+
     Grid::Grid() {
 
     }
 
-    Game::Game() : player((1280/2)-75, 600, 150, 20) {
+    Game::Game() : player((1280/2)-75, 600, 150, 20), white(0x0) {
 
+    }
+
+    void Game::init() {
+    	white = SDL_MapRGB(game::front->format, 255, 255, 255);
+    	ball.setBallRect((1280/2)-8, (720/2), 8, 8);
+    }
+
+    void Game::restorePos() {
+    	player.x = (1280/2)-75;
+    	player.y = 600;
+    	ball.x = (1280/2);
+    	ball.y = 720/2;
+    	ball.w = 16;
+    	ball.h = 16;
     }
 
     void Game::draw() {
     	SDL_Rect rc;
     	player.setRect(&rc);
-    	SDL_FillRect(game::front, &rc, SDL_MapRGB(game::front->format, 255, 255, 255));
+    	SDL_FillRect(game::front, &rc, white);
+    	ball.setRect(&rc);
+    	SDL_FillRect(game::front, &rc, white);
     }
 
 }

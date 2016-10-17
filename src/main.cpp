@@ -68,7 +68,7 @@ int main(int argc, char **argv) {
 
 void Init(int width, int height) {
     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0) {
-        std::cerr << "Error initalizing SDL: " << SDL_GetError() << "\n";
+        std::cerr << "Error initializing SDL: " << SDL_GetError() << "\n";
         exit(EXIT_FAILURE);
     }
     std::cout << "SDL initialized..\n";
