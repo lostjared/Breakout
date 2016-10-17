@@ -117,6 +117,7 @@ void Init(int width, int height) {
 
 
 void Release() {
+	std::cout << "Shutting down..\n";
     TTF_CloseFont(game::game_font);
     TTF_CloseFont(start::monaco);
     TTF_Quit();
@@ -125,4 +126,5 @@ void Release() {
     SDL_DestroyWindow(game::window);
     SDL_FreeSurface(game::front);
     SDL_Quit();
+    std::cout << "Stopped..\n";
 }
