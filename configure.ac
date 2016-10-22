@@ -99,7 +99,7 @@ AC_FUNC_MALLOC
 AC_CHECK_FUNCS([memset])
 
 TTF_LIB="`pkg-config SDL2_ttf --libs` "
-TTF_LIB+=" `pkg-config freetype2 --libs` -lSDL_image"
+TTF_LIB+=" `pkg-config freetype2 --libs` -lSDL2_image"
 
 AC_SUBST(TTF_LIB)
 AC_SUBST(LIBSDL_CFLAGS)

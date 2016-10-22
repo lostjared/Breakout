@@ -14,14 +14,13 @@ namespace game {
     
     void render_game() {
         SDL_FillRect(front, 0, SDL_MapRGB(front->format, 0, 0, 0));
+        // draw
+        _object->draw();
+        _object->update();
         SDL_LockTexture(tex, 0, &front->pixels, &front->pitch);
         SDL_UnlockTexture(tex);
         SDL_Rect dst = { 0,0,width,height };
         SDL_RenderCopy(render, tex, 0, &dst);
-        // draw
-        _object->draw();
-        _object->update();
-        
         SDL_RenderPresent(render);
         
         SDL_Delay(10);
