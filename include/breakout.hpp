@@ -79,6 +79,7 @@ namespace breakout {
         virtual void keyup(int key);
     private:
         Game the_game;
+        SDL_Surface *ball;
     };
     
     extern Breakout game_breakout;

@@ -8,13 +8,18 @@ namespace breakout {
     }
     
     void Breakout::loadData() {
-    	//SDL_SetColorKey(ball, SDL_TRUE, SDL_MapRGB(ball->format, 0, 0, 0));
+    	ball = game::LoadBMP(game::appPath("img/ball.bmp"));
+    	SDL_SetColorKey(ball, SDL_TRUE, SDL_MapRGB(ball->format, 0, 0, 0));
     	the_game.init();
     }
     
     void Breakout::draw() {
         the_game.draw();
-
+        SDL_Rect rc;
+        the_game.ball.setRect(&rc);
+        rc.w = ball->w;
+        rc.h = ball->h;
+        SDL_BlitSurface(ball, 0, game::front, &rc);
     }
     
     void Breakout::update() {
@@ -146,8 +151,7 @@ namespace breakout {
     	SDL_Rect rc;
     	player.setRect(&rc);
     	SDL_FillRect(game::front, &rc, white);
-    	ball.setRect(&rc);
-    	SDL_FillRect(game::front, &rc, white);
+
     }
 
 }
