@@ -17,8 +17,8 @@ namespace breakout {
         the_game.draw();
         SDL_Rect rc;
         the_game.ball.setRect(&rc);
-        rc.w = ball->w;
-        rc.h = ball->h;
+        rc.w = 10;
+        rc.h = 10;
         SDL_BlitSurface(ball, 0, game::front, &rc);
     }
     
@@ -40,6 +40,9 @@ namespace breakout {
     	if(keys[SDL_SCANCODE_DOWN]) {
     		the_game.player.move(Direction::DOWN);
     	}
+
+    	the_game.update();
+
     }
     
     void Breakout::keydown(int key) {
@@ -99,7 +102,7 @@ namespace breakout {
     	rc->h = h;
     }
 
-    Ball::Ball() : x(0), y(0), w(0), h(0), dir(Direction::UP) {
+    Ball::Ball() : x(0), y(0), w(0), h(0), dir(Direction::UP), d(1), speed(4) {
 
     }
 
@@ -135,7 +138,8 @@ namespace breakout {
 
     void Game::init() {
     	white = SDL_MapRGB(game::front->format, 255, 255, 255);
-    	ball.setBallRect((1280/2)-8, (720/2), 8, 8);
+    	ball.setBallRect((1280/2)-8, (720/2), 10, 10);
+    	ball.setDirection(Direction::UP);
     }
 
     void Game::restorePos() {
@@ -153,5 +157,45 @@ namespace breakout {
     	SDL_FillRect(game::front, &rc, white);
 
     }
+	void Game::update() {
+
+		std::cout << ball.d << "\n";
+		if(ball.d == 1 && ball.x > 5 && ball.y > 5) {
+			if(ball.x < 10) {
+				ball.d = (rand()%2) + 3;
+			}
+			else {
+				ball.x -= ball.speed;
+				ball.y -= ball.speed;
+			}
+
+		} else if(ball.d == 2 && ball.x > 5 && ball.y < 710) {
+			if(ball.x < 10) {
+				ball.d = (rand()%2) + 3;
+			} else {
+				ball.x -= ball.speed;
+				ball.y += ball.speed;
+			}
+		} else if(ball.d == 3 && ball.x < 1270 && ball.y > 10) {
+			if(ball.x > 1260)
+				ball.d = (rand()%2) + 1;
+			else {
+				ball.x += ball.speed;
+				ball.y -= ball.speed;
+			}
+		} else if(ball.d == 4 && ball.x < 1270 && ball.y < 710)  {
+			if(ball.x > 1260)
+				ball.d = (rand()%2) + 1;
+			else {
+				ball.x += ball.speed;
+				ball.y += ball.speed;
+			}
+		} else {
+			if(ball.d == 1 || ball.d == 3) ball.d++;
+			else if(ball.d == 2 || ball.d == 4) ball.d--;
+		}
+
+	}
+
 
 }

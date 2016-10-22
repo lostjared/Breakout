@@ -45,6 +45,7 @@ namespace breakout {
 	protected:
 		int x,y,w,h;
 		Direction dir;
+		int d, speed;
 	};
 
 
@@ -62,6 +63,7 @@ namespace breakout {
 		void init();
 		void draw();
 		void restorePos();
+		void update();
 
 		Grid grid;
 		Paddle player;
