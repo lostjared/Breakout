@@ -113,6 +113,12 @@ void Init(int width, int height) {
         SDL_Quit();
         exit(EXIT_FAILURE);
     }
+
+    if(IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) == 1) {
+    	std::cerr << "Error on IMG_init: " << IMG_GetError() << "\n";
+    	exit(EXIT_FAILURE);
+    }
+
     intro::game_intro.loadData();
     breakout::game_breakout.loadData();
     start::game_start.loadData();
@@ -124,6 +130,7 @@ void Release() {
     TTF_CloseFont(game::game_font);
     TTF_CloseFont(start::monaco);
     TTF_Quit();
+    IMG_Quit();
     SDL_DestroyRenderer(game::render);
     SDL_DestroyTexture(game::tex);
     SDL_DestroyWindow(game::window);

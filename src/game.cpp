@@ -15,14 +15,13 @@ namespace game {
     void render_game() {
         SDL_FillRect(front, 0, SDL_MapRGB(front->format, 0, 0, 0));
         // draw
+        SDL_LockTexture(tex, 0, &front->pixels, &front->pitch);
         _object->draw();
         _object->update();
-        SDL_LockTexture(tex, 0, &front->pixels, &front->pitch);
         SDL_UnlockTexture(tex);
         SDL_Rect dst = { 0,0,width,height };
         SDL_RenderCopy(render, tex, 0, &dst);
         SDL_RenderPresent(render);
-        
         SDL_Delay(10);
     }
     
@@ -75,6 +74,7 @@ namespace game {
                 SDL_Quit();
                 exit(EXIT_FAILURE);
             }
+
             // start
             if(SDL_MUSTLOCK(dst)) {
                 SDL_LockSurface(dst);
@@ -82,7 +82,10 @@ namespace game {
             
             if(SDL_MUSTLOCK(bmp1)) {
                 SDL_LockSurface(bmp1);
+
             }
+
+
             for(unsigned int i = 0; i < dst->w; ++i) {
                 for(unsigned int z = 0; z < dst->h; ++z) {
                     unsigned int *buf1 = (unsigned int*)bmp1->pixels+(i+z*bmp1->w);

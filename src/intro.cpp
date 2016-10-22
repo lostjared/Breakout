@@ -17,6 +17,9 @@ namespace intro {
     
     void Intro::loadData() {
         lostlogo = game::LoadBMP(game::appPath("img/lostlogo.png"));
+    	//lostlogo = SDL_LoadBMP(game::appPath("img/lostlogo.bmp").c_str());
+    	//SDL_Surface *temp = SDL_ConvertSurfaceFormat(lostlogo, game::front->format->format, 0);
+
         jblogo = game::LoadBMP(game::appPath("img/jaredblogo.png"));
     }
     
@@ -51,7 +54,7 @@ namespace intro {
                 start_time = SDL_GetTicks();
             }
             
-            game::gfx::FadeBlend(lostlogo, game::front, alpha);
+           game::gfx::FadeBlend(lostlogo, game::front, alpha);
             
         } else if(drawn_start == 1) {
             static float alpha = 0.0f;
