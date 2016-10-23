@@ -158,10 +158,12 @@ namespace breakout {
         
     }
     void Game::update() {
-        
-        std::cout << ball.d << "\n";
-        if(ball.d == 1 && ball.x > 5 && ball.y > 5) {
-            if(ball.x < 10) {
+
+
+    	std::cout << "Ball.d = " << ball.d << "\n";
+
+         if(ball.d == 1 && ball.x > 5 && ball.y > 5) {
+            if(ball.x < 10 || (ball.x >= player.x && ball.x <= player.x+player.w && ball.y+16 >= player.y && ball.y <= player.y+player.h)) {
                 ball.d = (rand()%2) + 3;
             }
             else {
@@ -170,21 +172,23 @@ namespace breakout {
             }
             
         } else if(ball.d == 2 && ball.x > 5 && ball.y < 710) {
-            if(ball.x < 10) {
+
+            if(ball.x < 10 || (ball.x >= player.x && ball.x <= player.x+player.w && ball.y+16 >= player.y && ball.y <= player.y+player.h)) {
                 ball.d = (rand()%2) + 3;
             } else {
                 ball.x -= ball.speed;
                 ball.y += ball.speed;
             }
         } else if(ball.d == 3 && ball.x < 1270 && ball.y > 10) {
-            if(ball.x > 1260)
+
+        	if(ball.x > 1260)
                 ball.d = (rand()%2) + 1;
             else {
                 ball.x += ball.speed;
                 ball.y -= ball.speed;
             }
         } else if(ball.d == 4 && ball.x < 1270 && ball.y < 710)  {
-            if(ball.x > 1260)
+            if(ball.x > 1260 || (ball.x >= player.x && ball.x <= player.x+player.w && ball.y+16 >= player.y && ball.y <= player.y+player.h))
                 ball.d = (rand()%2) + 1;
             else {
                 ball.x += ball.speed;

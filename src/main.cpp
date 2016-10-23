@@ -32,6 +32,8 @@ int main(int argc, char **argv) {
         exit(EXIT_FAILURE);
     }
     
+    srand(static_cast<int>(time(0)));
+
     Init(game::width, game::height);
 #ifndef DEBUG_MODE
     game::setScreen(&intro::game_intro);
