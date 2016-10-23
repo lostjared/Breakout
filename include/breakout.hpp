@@ -39,12 +39,10 @@ namespace breakout {
 		Ball();
 		void setBallRect(int cx, int cy, int cw, int ch);
 		void setRect(SDL_Rect *rc);
-		void setDirection(Direction d);
 		friend class Game;
 		void draw();
 	protected:
 		int x,y,w,h;
-		Direction dir;
 		int d, speed;
 	};
 

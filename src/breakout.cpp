@@ -102,7 +102,7 @@ namespace breakout {
         rc->h = h;
     }
     
-    Ball::Ball() : x(0), y(0), w(0), h(0), dir(Direction::UP), d(1), speed(4) {
+    Ball::Ball() : x(0), y(0), w(0), h(0), d(1), speed(4) {
         
     }
     
@@ -120,10 +120,6 @@ namespace breakout {
         rc->h = h;
     }
     
-    void Ball::setDirection(Direction d) {
-        dir = d;
-    }
-    
     void Ball::draw() {
         
     }
@@ -139,7 +135,6 @@ namespace breakout {
     void Game::init() {
         white = SDL_MapRGB(game::front->format, 255, 255, 255);
         ball.setBallRect((1280/2)-8, (720/2), 10, 10);
-        ball.setDirection(Direction::UP);
     }
     
     void Game::restorePos() {
