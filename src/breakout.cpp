@@ -5,6 +5,8 @@ namespace breakout {
     Breakout game_breakout;
     
     Breakout::~Breakout() {
+    	if(ball)
+    		SDL_FreeSurface(ball);
     }
     
     void Breakout::loadData() {
