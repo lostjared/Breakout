@@ -55,12 +55,12 @@ namespace breakout {
         
     }
     
-    Brick::Brick() : brick_type(0), visible(false) {
+    Brick::Brick() : brick_type(0), visible(false), color(0x0) {
         
     }
     
     void Brick::setVisible(const bool &b) {
-        
+        visible = b;
     }
     bool Brick::isVisible() const {
         return visible;
@@ -171,7 +171,17 @@ namespace breakout {
         SDL_Rect rc;
         player.setRect(&rc);
         SDL_FillRect(game::front, &rc, white);
-        
+        for(unsigned int i = 0; i < Grid::BRICK_W; ++i) {
+        	for(unsigned int z = 0; z < Grid::BRICK_H; ++z) {
+        		SDL_Rect rc;
+        		rc.x = i*Grid::BRICK_SIZE_W+3;
+        		rc.y = z*Grid::BRICK_SIZE_H+3;
+        		rc.w = Grid::BRICK_SIZE_W-3;
+        		rc.h = Grid::BRICK_SIZE_H-3;
+        		if(grid.bricks[i][z].visible)
+        			SDL_FillRect(game::front, &rc, grid.bricks[i][z].color);
+        	}
+        }
     }
     void Game::update() {
 

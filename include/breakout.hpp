@@ -53,12 +53,15 @@ namespace breakout {
 	class Grid {
 	public:
 
-		static const unsigned int BRICK_W=(1280/32);
-		static const unsigned int BRICK_H=(200/16);
+		static const unsigned int BRICK_SIZE_W=32;
+		static const unsigned int BRICK_SIZE_H=16;
+		static const unsigned int BRICK_W=(1280/BRICK_SIZE_W);
+		static const unsigned int BRICK_H=(200/BRICK_SIZE_H);
 
 		Grid();
-
 		void initBricks();
+
+		friend class Game;
 
 	protected:
 		Brick bricks[BRICK_W][BRICK_H];
