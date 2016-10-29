@@ -12,10 +12,13 @@ namespace breakout {
 		bool isVisible() const;
 		int getType() const;
 		void setType(const int &b);
+		void setColor(unsigned int col);
+		unsigned int getColor();
 		friend class Game;
 	protected:
 		int brick_type;
 		bool visible;
+		unsigned int color;
 	};
 
 	enum class Direction { LEFT, UP_LEFT, UP_RIGHT, RIGHT, DOWN_LEFT, DOWN_RIGHT, UP, DOWN };
@@ -49,9 +52,16 @@ namespace breakout {
 
 	class Grid {
 	public:
+
+		static const unsigned int BRICK_W=(1280/32);
+		static const unsigned int BRICK_H=(200/16);
+
 		Grid();
+
+		void initBricks();
+
 	protected:
-		Brick bricks[1280/32][360/16];
+		Brick bricks[BRICK_W][BRICK_H];
 
 	};
 

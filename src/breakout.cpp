@@ -74,6 +74,14 @@ namespace breakout {
         brick_type = b;
     }
     
+    void Brick::setColor(unsigned int col) {
+    	color = col;
+    }
+    unsigned int Brick::getColor() {
+    	return color;
+    }
+
+
     Paddle::Paddle(int cx, int cy, int cw, int ch) : x(cx), y(cy), w(cw), h(ch) {
         
     }
@@ -130,13 +138,24 @@ namespace breakout {
         
     }
     
+    void Grid::initBricks() {
+    	for(unsigned int i = 0; i < BRICK_W; ++i)
+    		for(unsigned int z = 0; z < BRICK_H; ++z) {
+    			bricks[i][z].setVisible(true);
+    			bricks[i][z].setType(1);
+    			bricks[i][z].setColor(SDL_MapRGB(game::front->format, 100+rand()%155, 100+rand()%155, 100+rand()%155));
+    		}
+    }
+
+
     Game::Game() : player((1280/2)-75, 600, 150, 10), white(0x0) {
-        
+
     }
     
     void Game::init() {
         white = SDL_MapRGB(game::front->format, 255, 255, 255);
         ball.setBallRect((1280/2)-8, (720/2), 10, 10);
+        grid.initBricks();
     }
     
     void Game::restorePos() {
