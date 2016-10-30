@@ -185,12 +185,19 @@ namespace breakout {
     }
     void Game::update() {
 
-
-    	std::cout << "Ball.d = " << ball.d << "\n";
-
+    	if(ball.x >= player.x && ball.y >= player.y && ball.x <= player.x+player.w && ball.y <= player.y+player.h) {
+    		if(ball.x >= player.x && ball.x <= (player.x+(player.w/2))) {
+    			ball.d = 3;
+    			ball.y -= ball.speed;
+    		} else {
+    			ball.d = 1;
+    			ball.y -= ball.speed;
+    		}
+    	}
+    	else
          if(ball.d == 1 && ball.x > 5 && ball.y > 5) {
-            if(ball.x < 10 || (ball.x >= player.x && ball.x <= player.x+player.w && ball.y+16 >= player.y && ball.y <= player.y+player.h)) {
-                ball.d = (rand()%2) + 3;
+            if(ball.x < 10) {
+                ball.d = 3;
             }
             else {
                 ball.x -= ball.speed;
@@ -199,8 +206,8 @@ namespace breakout {
             
         } else if(ball.d == 2 && ball.x > 5 && ball.y < 710) {
 
-            if(ball.x < 10 || (ball.x >= player.x && ball.x <= player.x+player.w && ball.y+16 >= player.y && ball.y <= player.y+player.h)) {
-                ball.d = (rand()%2) + 3;
+            if(ball.x < 10) {
+                ball.d = 4;
             } else {
                 ball.x -= ball.speed;
                 ball.y += ball.speed;
@@ -208,20 +215,26 @@ namespace breakout {
         } else if(ball.d == 3 && ball.x < 1270 && ball.y > 10) {
 
         	if(ball.x > 1260)
-                ball.d = (rand()%2) + 1;
+                ball.d = 1;
             else {
                 ball.x += ball.speed;
                 ball.y -= ball.speed;
             }
         } else if(ball.d == 4 && ball.x < 1270 && ball.y < 710)  {
-            if(ball.x > 1260 || (ball.x >= player.x && ball.x <= player.x+player.w && ball.y+16 >= player.y && ball.y <= player.y+player.h))
-                ball.d = (rand()%2) + 1;
+            if(ball.x > 1260) {
+                ball.d = 2;
+            }
             else {
                 ball.x += ball.speed;
                 ball.y += ball.speed;
             }
         } else {
-            if(ball.d == 1 || ball.d == 3) ball.d++;
+
+        	if(ball.y > 705) {
+        		std::cout << "Round was lost here..\n";
+        	}
+
+        	if(ball.d == 1 || ball.d == 3) ball.d++;
             else if(ball.d == 2 || ball.d == 4) ball.d--;
         }
         
