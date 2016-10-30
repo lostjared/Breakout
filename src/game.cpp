@@ -22,7 +22,7 @@ namespace game {
         SDL_Rect dst = { 0,0,width,height };
         SDL_RenderCopy(render, tex, 0, &dst);
         SDL_RenderPresent(render);
-        SDL_Delay(10);
+        SDL_Delay(15);
     }
     
     void keydown_game(int key) {

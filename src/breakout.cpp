@@ -56,7 +56,10 @@ namespace breakout {
     }
     
     void Breakout::keydown(int key) {
-        
+//#ifdef DEBUG_MODE
+        if(key == SDLK_SPACE)
+        	the_game.releaseBall();
+//#endif
     }
     
     void Breakout::keyup(int key) {
@@ -110,10 +113,10 @@ namespace breakout {
                 if(x < 1280-w) x += PADDLE_SPEED;
                 break;
             case Direction::UP:
-                if(y > 360) y -= PADDLE_SPEED;
+//                if(y > 360) y -= (PADDLE_SPEED/2);
                 break;
             case Direction::DOWN:
-                if(y < 720-h) y += PADDLE_SPEED;
+//                if(y < 720-h) y += (PADDLE_SPEED/2);
                 break;
             default:
                 break;
@@ -155,7 +158,7 @@ namespace breakout {
 
     void Ball::resetPosition() {
     	setBallRect(1280/2, 720/2, 10, 10);
-    	d = 1;
+    	d = ((rand()%10) > 5) ? 1 : 3;
     }
 
     Grid::Grid() {
@@ -220,7 +223,37 @@ namespace breakout {
         	}
         }
     }
+
     void Game::update() {
+
+
+    	for(int x = 0; x < Grid::BRICK_W; ++x) {
+    		for(int y = 0; y < Grid::BRICK_H; ++y) {
+
+    			int cx = x*Grid::BRICK_SIZE_W+3;
+    			int cy = y*Grid::BRICK_SIZE_H+3;
+    			int cw = Grid::BRICK_SIZE_W-3;
+    			int ch = (Grid::BRICK_SIZE_H-3);
+
+    			SDL_Rect rc1 = {cx,cy,cw,ch};
+
+
+    			for(int q = 0; q < Ball::MAX_BALL; ++q) {
+    				if(ball[q].getActive() == false)
+    					continue;
+
+    				SDL_Rect rc2 = {ball[q].x, ball[q].y, ball[q].w, ball[q].h};
+
+    				if( (grid.bricks[x][y].isVisible() && rc1.x < rc2.x + rc2.w) && (rc1.y < rc2.y + rc2.h) && (rc2.x < rc1.x + rc1.w) && (rc2.y < rc1.y + rc1.h)) {
+    					grid.bricks[x][y].setVisible(false);
+    					ball[q].d = ((rand()%2) == 0) ? 2 : 4;
+    				}
+    			}
+
+
+    		}
+    	}
+
 
     	for(int i = 0; i < Ball::MAX_BALL; ++i) {
 
@@ -229,10 +262,10 @@ namespace breakout {
 
     		if(ball[i].x >= player.x && ball[i].y >= player.y && ball[i].x <= player.x+player.w && ball[i].y <= player.y+player.h) {
     			if(ball[i].x >= player.x && ball[i].x <= (player.x+(player.w/2))) {
-    				ball[i].d = 3;
+    				ball[i].d = ((rand()%2) == 0) ? 1 : 3;
     				ball[i].y -= ball[i].speed;
     			} else {
-    				ball[i].d = 1;
+    				ball[i].d = ((rand()%2) == 0) ? 3 : 1;
     				ball[i].y -= ball[i].speed;
     			}
     		}
@@ -273,7 +306,7 @@ namespace breakout {
     			} else {
 
     				if(ball[i].y > 705) {
-    					std::cout << "Round was lost here..\n";
+    					ball[i].setActive(false);
     				}
 
     				if(ball[i].d == 1 || ball[i].d == 3) ball[i].d++;
