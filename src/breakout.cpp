@@ -13,15 +13,23 @@ namespace breakout {
         ball = game::LoadBMP(game::appPath("img/ball.bmp"));
         SDL_SetColorKey(ball, SDL_TRUE, SDL_MapRGB(ball->format, 0, 0, 0));
         the_game.init();
+        the_game.newGame();
     }
     
     void Breakout::draw() {
         the_game.draw();
         SDL_Rect rc;
-        the_game.ball.setRect(&rc);
-        rc.w = 10;
-        rc.h = 10;
-        SDL_BlitSurface(ball, 0, game::front, &rc);
+
+        for(unsigned int i = 0; i < Ball::MAX_BALL; ++i) {
+
+        	if(the_game.ball[i].getActive() == false)
+        		continue;
+
+        	the_game.ball[i].setRect(&rc);
+        	rc.w = 10;
+        	rc.h = 10;
+        	SDL_BlitSurface(ball, 0, game::front, &rc);
+        }
     }
     
     void Breakout::update() {
@@ -86,6 +94,13 @@ namespace breakout {
         
     }
     
+    void Paddle::resetPosition() {
+    	x = 1280/2;
+    	y = 600;
+    	w = 150;
+    	h = 10;
+    }
+
     void Paddle::move(Direction dir) {
         switch(dir) {
             case Direction::LEFT:
@@ -112,8 +127,8 @@ namespace breakout {
         rc->h = h;
     }
     
-    Ball::Ball() : x(0), y(0), w(0), h(0), d(1), speed(4) {
-        
+    Ball::Ball() : x(1280/2), y(720/2), w(10), h(10), d(1), speed(4), active(false) {
+
     }
     
     void Ball::setBallRect(int cx, int cy, int cw, int ch) {
@@ -134,6 +149,15 @@ namespace breakout {
         
     }
     
+    void Ball::setActive(const bool &state) {
+    	active = state;
+    }
+
+    void Ball::resetPosition() {
+    	setBallRect(1280/2, 720/2, 10, 10);
+    	d = 1;
+    }
+
     Grid::Grid() {
         
     }
@@ -152,21 +176,34 @@ namespace breakout {
 
     }
     
+    void Game::newGame() {
+    	releaseBall();
+    	player.resetPosition();
+    }
+
     void Game::init() {
         white = SDL_MapRGB(game::front->format, 255, 255, 255);
-        ball.setBallRect((1280/2)-8, (720/2), 10, 10);
+       for(unsigned int i = 0; i < Ball::MAX_BALL; ++i)
+        ball[i].setBallRect((1280/2)-8, (720/2), 10, 10);
         grid.initBricks();
     }
     
     void Game::restorePos() {
         player.x = (1280/2)-75;
         player.y = 600;
-        ball.x = (1280/2);
-        ball.y = 720/2;
-        ball.w = 16;
-        ball.h = 16;
+
     }
     
+    void Game::releaseBall() {
+    	for(int i = 0; i < Ball::MAX_BALL; ++i) {
+    		if(ball[i].getActive() == false) {
+    			ball[i].setActive(true);
+    			ball[i].resetPosition();
+    			break;
+    		}
+    	}
+    }
+
     void Game::draw() {
         SDL_Rect rc;
         player.setRect(&rc);
@@ -185,60 +222,65 @@ namespace breakout {
     }
     void Game::update() {
 
-    	if(ball.x >= player.x && ball.y >= player.y && ball.x <= player.x+player.w && ball.y <= player.y+player.h) {
-    		if(ball.x >= player.x && ball.x <= (player.x+(player.w/2))) {
-    			ball.d = 3;
-    			ball.y -= ball.speed;
-    		} else {
-    			ball.d = 1;
-    			ball.y -= ball.speed;
+    	for(int i = 0; i < Ball::MAX_BALL; ++i) {
+
+    		if(ball[i].getActive() == false)
+    			continue;
+
+    		if(ball[i].x >= player.x && ball[i].y >= player.y && ball[i].x <= player.x+player.w && ball[i].y <= player.y+player.h) {
+    			if(ball[i].x >= player.x && ball[i].x <= (player.x+(player.w/2))) {
+    				ball[i].d = 3;
+    				ball[i].y -= ball[i].speed;
+    			} else {
+    				ball[i].d = 1;
+    				ball[i].y -= ball[i].speed;
+    			}
     		}
+    		else
+    			if(ball[i].d == 1 && ball[i].x > 5 && ball[i].y > 5) {
+    				if(ball[i].x < 10) {
+    					ball[i].d = 3;
+    				}
+    				else {
+    					ball[i].x -= ball[i].speed;
+    					ball[i].y -= ball[i].speed;
+    				}
+
+    			} else if(ball[i].d == 2 && ball[i].x > 5 && ball[i].y < 710) {
+
+    				if(ball[i].x < 10) {
+    					ball[i].d = 4;
+    				} else {
+    					ball[i].x -= ball[i].speed;
+    					ball[i].y += ball[i].speed;
+    				}
+    			} else if(ball[i].d == 3 && ball[i].x < 1270 && ball[i].y > 10) {
+
+    				if(ball[i].x > 1260)
+    					ball[i].d = 1;
+    				else {
+    					ball[i].x += ball[i].speed;
+    					ball[i].y -= ball[i].speed;
+    				}
+    			} else if(ball[i].d == 4 && ball[i].x < 1270 && ball[i].y < 710)  {
+    				if(ball[i].x > 1260) {
+    					ball[i].d = 2;
+    				}
+    				else {
+    					ball[i].x += ball[i].speed;
+    					ball[i].y += ball[i].speed;
+    				}
+    			} else {
+
+    				if(ball[i].y > 705) {
+    					std::cout << "Round was lost here..\n";
+    				}
+
+    				if(ball[i].d == 1 || ball[i].d == 3) ball[i].d++;
+    				else if(ball[i].d == 2 || ball[i].d == 4) ball[i].d--;
+    			}
+
     	}
-    	else
-         if(ball.d == 1 && ball.x > 5 && ball.y > 5) {
-            if(ball.x < 10) {
-                ball.d = 3;
-            }
-            else {
-                ball.x -= ball.speed;
-                ball.y -= ball.speed;
-            }
-            
-        } else if(ball.d == 2 && ball.x > 5 && ball.y < 710) {
 
-            if(ball.x < 10) {
-                ball.d = 4;
-            } else {
-                ball.x -= ball.speed;
-                ball.y += ball.speed;
-            }
-        } else if(ball.d == 3 && ball.x < 1270 && ball.y > 10) {
-
-        	if(ball.x > 1260)
-                ball.d = 1;
-            else {
-                ball.x += ball.speed;
-                ball.y -= ball.speed;
-            }
-        } else if(ball.d == 4 && ball.x < 1270 && ball.y < 710)  {
-            if(ball.x > 1260) {
-                ball.d = 2;
-            }
-            else {
-                ball.x += ball.speed;
-                ball.y += ball.speed;
-            }
-        } else {
-
-        	if(ball.y > 705) {
-        		std::cout << "Round was lost here..\n";
-        	}
-
-        	if(ball.d == 1 || ball.d == 3) ball.d++;
-            else if(ball.d == 2 || ball.d == 4) ball.d--;
-        }
-        
     }
-    
-    
 }

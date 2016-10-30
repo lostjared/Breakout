@@ -31,6 +31,7 @@ namespace breakout {
 		void move(Direction dir);
 		void draw();
 		void setRect(SDL_Rect *rc);
+		void resetPosition();
 		friend class Game;
 	protected:
 		int x,y,w,h;
@@ -39,14 +40,21 @@ namespace breakout {
 
 	class Ball {
 	public:
+
+		static const int MAX_BALL=5;
+
 		Ball();
 		void setBallRect(int cx, int cy, int cw, int ch);
 		void setRect(SDL_Rect *rc);
 		friend class Game;
 		void draw();
+		void setActive(const bool &state);
+		bool getActive() const { return active; }
+		void resetPosition();
 	protected:
 		int x,y,w,h;
 		int d, speed;
+		bool active;
 	};
 
 
@@ -75,10 +83,12 @@ namespace breakout {
 		void draw();
 		void restorePos();
 		void update();
+		void releaseBall();
+		void newGame();
 
 		Grid grid;
 		Paddle player;
-		Ball ball;
+		Ball ball[Ball::MAX_BALL];
 		Uint32 white;
 	};
 
