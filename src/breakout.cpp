@@ -56,10 +56,10 @@ namespace breakout {
     }
     
     void Breakout::keydown(int key) {
-//#ifdef DEBUG_MODE
+#ifdef DEBUG_MODE
         if(key == SDLK_SPACE)
         	the_game.releaseBall();
-//#endif
+#endif
     }
     
     void Breakout::keyup(int key) {
