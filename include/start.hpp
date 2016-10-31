@@ -16,9 +16,9 @@ namespace start {
         void BlendImage(SDL_Surface *src, SDL_Surface *dst);
         void enterPressed();
     private:
-        SDL_Surface *text, *title;
+        SDL_Surface *title;
         SDL_Surface *bg,*_start,*about,*_exit;
-        SDL_Color fnt_color, tcolor;
+        SDL_Color tcolor;
         float alpha;
         int cursor_pos;
     };

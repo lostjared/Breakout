@@ -8,6 +8,7 @@ namespace game {
     SDL_Texture *tex;
     SDL_Surface *front;
     TTF_Font *game_font;
+    SDL_Surface *debug_mode;
     
     GameObject *_object;
     std::string path;
@@ -18,6 +19,10 @@ namespace game {
         SDL_LockTexture(tex, 0, &front->pixels, &front->pitch);
         _object->draw();
         _object->update();
+#ifdef DEBUG_MODE
+        SDL_Rect pos = { 10, 10, debug_mode->w, debug_mode->h };
+        SDL_BlitSurface(debug_mode, 0, game::front, &pos);
+#endif
         SDL_UnlockTexture(tex);
         SDL_Rect dst = { 0,0,width,height };
         SDL_RenderCopy(render, tex, 0, &dst);

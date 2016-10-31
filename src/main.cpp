@@ -121,6 +121,14 @@ void Init(int width, int height) {
     	exit(EXIT_FAILURE);
     }
 
+    SDL_Color fnt_color = {255,255,255};
+    game::debug_mode = TTF_RenderText_Solid(game::game_font, "Debug Mode", fnt_color);
+    if(!game::debug_mode) {
+        std::cerr << "Error rendering text: " << TTF_GetError() << "\n";
+        TTF_Quit();
+        SDL_Quit();
+       exit(EXIT_FAILURE);
+    }
     intro::game_intro.loadData();
     breakout::game_breakout.loadData();
     start::game_start.loadData();

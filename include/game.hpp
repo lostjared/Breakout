@@ -2,7 +2,7 @@
 #define __GAME__H_
 
 // so i don't have to watch the intro a million times
-//#define DEBUG_MODE
+#define DEBUG_MODE
 
 #include "SDL.h"
 #include "SDL_ttf.h"
@@ -20,6 +20,7 @@ namespace game {
     
     extern SDL_Texture *tex;
     extern SDL_Surface *front;
+    extern SDL_Surface *debug_mode;
     
     extern TTF_Font *game_font;
     

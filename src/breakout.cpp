@@ -157,8 +157,8 @@ namespace breakout {
     }
 
     void Ball::resetPosition() {
-    	setBallRect(1280/2, 720/2, 10, 10);
-    	d = ((rand()%10) > 5) ? 1 : 3;
+    	setBallRect(rand()%1260, 720/2, 10, 10);
+    	d = ((rand()%2) == 0) ? 1 : 3;
     }
 
     Grid::Grid() {
