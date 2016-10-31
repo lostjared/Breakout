@@ -20,7 +20,9 @@ namespace game {
     
     extern SDL_Texture *tex;
     extern SDL_Surface *front;
+#ifdef DEBUG_MODE
     extern SDL_Surface *debug_mode;
+#endif
     
     extern TTF_Font *game_font;
     

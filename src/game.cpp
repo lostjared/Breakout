@@ -8,7 +8,9 @@ namespace game {
     SDL_Texture *tex;
     SDL_Surface *front;
     TTF_Font *game_font;
+#ifdef DEBUG_MODE
     SDL_Surface *debug_mode;
+#endif
     
     GameObject *_object;
     std::string path;

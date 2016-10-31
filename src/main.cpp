@@ -120,7 +120,7 @@ void Init(int width, int height) {
     	std::cerr << "Error on IMG_init: " << IMG_GetError() << "\n";
     	exit(EXIT_FAILURE);
     }
-
+#ifdef DEBUG_MODE
     SDL_Color fnt_color = {255,255,255};
     game::debug_mode = TTF_RenderText_Solid(game::game_font, "Debug Mode", fnt_color);
     if(!game::debug_mode) {
@@ -129,6 +129,7 @@ void Init(int width, int height) {
         SDL_Quit();
        exit(EXIT_FAILURE);
     }
+#endif
     intro::game_intro.loadData();
     breakout::game_breakout.loadData();
     start::game_start.loadData();
