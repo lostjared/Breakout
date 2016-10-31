@@ -262,10 +262,12 @@ namespace breakout {
 
     		if(ball[i].x >= player.x && ball[i].y >= player.y && ball[i].x <= player.x+player.w && ball[i].y <= player.y+player.h) {
     			if(ball[i].x >= player.x && ball[i].x <= (player.x+(player.w/2))) {
-    				ball[i].d = ((rand()%2) == 0) ? 1 : 3;
+    				//ball[i].d = ((rand()%2) == 0) ? 1 : 3;
+    				ball[i].d = 1;
     				ball[i].y -= ball[i].speed;
     			} else {
-    				ball[i].d = ((rand()%2) == 0) ? 3 : 1;
+    				ball[i].d = 3;
+    				//ball[i].d = ((rand()%2) == 0) ? 3 : 1;
     				ball[i].y -= ball[i].speed;
     			}
     		}
