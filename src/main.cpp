@@ -138,6 +138,12 @@ void Init(int width, int height) {
 
 void Release() {
 	std::cout << "Shutting down..\n";
+
+#ifdef DEBUG_MODE
+	SDL_FreeSurface(game::debug_mode);
+#endif
+
+
     TTF_CloseFont(game::game_font);
     TTF_CloseFont(start::monaco);
     TTF_Quit();
