@@ -246,7 +246,7 @@ namespace breakout {
 
     				if( (grid.bricks[x][y].isVisible() && rc1.x < rc2.x + rc2.w) && (rc1.y < rc2.y + rc2.h) && (rc2.x < rc1.x + rc1.w) && (rc2.y < rc1.y + rc1.h)) {
     					grid.bricks[x][y].setVisible(false);
-    					ball[q].d = ((rand()%2) == 0) ? 2 : 4;
+    					ball[q].d = (rc2.x > rc1.x+(rc1.w/2)) ? 4 : 2;
     				}
     			}
 

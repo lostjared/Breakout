@@ -61,10 +61,10 @@ namespace breakout {
 	class Grid {
 	public:
 
-		static const unsigned int BRICK_SIZE_W=32;
+		static const unsigned int BRICK_SIZE_W=64;
 		static const unsigned int BRICK_SIZE_H=16;
 		static const unsigned int BRICK_W=(1280/BRICK_SIZE_W);
-		static const unsigned int BRICK_H=(200/BRICK_SIZE_H);
+		static const unsigned int BRICK_H=(100/BRICK_SIZE_H);
 
 		Grid();
 		void initBricks();
