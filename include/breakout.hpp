@@ -90,6 +90,8 @@ namespace breakout {
 		Paddle player;
 		Ball ball[Ball::MAX_BALL];
 		Uint32 white;
+		int level;
+		int score;
 	};
 
     class Breakout : public game::GameObject {

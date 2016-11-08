@@ -175,11 +175,13 @@ namespace breakout {
     }
 
 
-    Game::Game() : player((1280/2)-75, 600, 150, 10), white(0x0) {
+    Game::Game() : player((1280/2)-75, 600, 150, 10), white(0x0), level(1), score(0) {
 
     }
     
     void Game::newGame() {
+    	level = 1;
+    	score = 0;
     	releaseBall();
     	player.resetPosition();
     }
@@ -246,6 +248,7 @@ namespace breakout {
 
     				if( (grid.bricks[x][y].isVisible() && rc1.x < rc2.x + rc2.w) && (rc1.y < rc2.y + rc2.h) && (rc2.x < rc1.x + rc1.w) && (rc2.y < rc1.y + rc1.h)) {
     					grid.bricks[x][y].setVisible(false);
+    					score += 10;
     					ball[q].d = (rc2.x > rc1.x+(rc1.w/2)) ? 4 : 2;
     				}
     			}
