@@ -175,12 +175,13 @@ namespace breakout {
     }
 
 
-    Game::Game() : player((1280/2)-75, 600, 150, 10), white(0x0), level(1), score(0) {
+    Game::Game() : player((1280/2)-75, 600, 150, 10), white(0x0), level(1), score(0), lives(5) {
 
     }
     
     void Game::newGame() {
     	level = 1;
+    	lives = 5;
     	score = 0;
     	releaseBall();
     	player.resetPosition();
@@ -312,6 +313,10 @@ namespace breakout {
 
     				if(ball[i].y > 705) {
     					ball[i].setActive(false);
+    					--lives;
+    					if(lives <= 0) {
+    						// game over
+    					}
     				}
 
     				if(ball[i].d == 1 || ball[i].d == 3) ball[i].d++;

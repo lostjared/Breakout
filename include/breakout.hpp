@@ -92,6 +92,7 @@ namespace breakout {
 		Uint32 white;
 		int level;
 		int score;
+		int lives;
 	};
 
     class Breakout : public game::GameObject {
