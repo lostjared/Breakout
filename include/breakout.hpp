@@ -86,6 +86,9 @@ namespace breakout {
 		void releaseBall();
 		void newGame();
 
+		friend class Breakout;
+
+	private:
 		Grid grid;
 		Paddle player;
 		Ball ball[Ball::MAX_BALL];
