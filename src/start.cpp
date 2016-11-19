@@ -5,6 +5,8 @@ namespace start {
   
     Start game_start;
     TTF_Font *monaco;
+    SDL_Surface *bg;
+
     
     Start::~Start() {
         if(title != 0)
@@ -34,27 +36,9 @@ namespace start {
 
     }
     
-    void Start::BlendImage(SDL_Surface *src, SDL_Surface *dst) {
-    	game::gfx::FadeBlend(src, dst, alpha);
-    	static unsigned int direction = 0;
-    	if(direction == 0) {
-        	alpha += 0.05f;
-        	if(alpha >= 3.0f) {
-        		direction = 1;
-        	}
-
-    	}
-    	else if(direction == 1) {
-    		alpha -= 0.05f;
-    		if(alpha <= 1.0f) {
-    			direction = 0;
-    			alpha = 1.0f;
-    		}
-    	}
-    }
-
     void Start::draw() {
-    	BlendImage(bg, game::front);
+    	SDL_FillRect(game::front, 0, SDL_MapRGB(game::front->format, 0, 0, 0));
+    	game::gfx::BlendImage(alpha, bg, game::front);
     	SDL_Rect pos1 = { (game::front->w/2)-(title->w/2), 0, title->w, title->h };
         SDL_BlitSurface(title, 0, game::front, &pos1);
 

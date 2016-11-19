@@ -109,6 +109,7 @@ namespace breakout {
     private:
         Game the_game;
         SDL_Surface *ball;
+        float alpha = 1.0f;
     };
     
     extern Breakout game_breakout;

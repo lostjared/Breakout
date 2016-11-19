@@ -21,6 +21,9 @@ namespace intro {
     }
     
     void Intro::draw() {
+
+    	SDL_FillRect(game::front, 0, SDL_MapRGB(game::front->format, 0, 0, 0));
+
         static int drawn_start = 0;
         static unsigned int start_time = 0;
         static float direction = 0.05f;

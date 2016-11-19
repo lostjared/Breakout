@@ -16,7 +16,7 @@ namespace game {
     std::string path;
     
     void render_game() {
-        SDL_FillRect(front, 0, SDL_MapRGB(front->format, 0, 0, 0));
+        //SDL_FillRect(front, 0, SDL_MapRGB(front->format, 0, 0, 0));
         // draw
         SDL_LockTexture(tex, 0, &front->pixels, &front->pitch);
         _object->draw();
@@ -29,7 +29,7 @@ namespace game {
         SDL_Rect dst = { 0,0,width,height };
         SDL_RenderCopy(render, tex, 0, &dst);
         SDL_RenderPresent(render);
-        SDL_Delay(15);
+        SDL_Delay(5);
     }
     
     void keydown_game(int key) {
@@ -152,6 +152,29 @@ namespace game {
                  SDL_UnlockSurface(bmp1);
              }
         }
-    }
     
+        void BlendImage(float &alpha, SDL_Surface *src, SDL_Surface *dst) {
+   	    	FadeBlend(src, dst, alpha);
+   	    	static unsigned int direction = 0;
+   	    	if(direction == 0) {
+   	        	alpha += 0.05f;
+   	        	if(alpha >= 3.0f) {
+   	        		direction = 1;
+   	        	}
+   	    	}
+   	    	else if(direction == 1) {
+   	    		alpha -= 0.05f;
+   	    		if(alpha <= 1.0f) {
+   	    			direction = 0;
+   	    			alpha = 1.0f;
+   	    		}
+   	    	}
+   	    }
+
+        void DirectionalBlend(float &alpha, unsigned int &direction, SDL_Surface *src, SDL_Surface *dst) {
+
+        }
+
+    }
 }
+

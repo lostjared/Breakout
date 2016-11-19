@@ -1,4 +1,5 @@
 #include "breakout.hpp"
+#include "start.hpp"
 
 namespace breakout {
     
@@ -16,10 +17,11 @@ namespace breakout {
         the_game.newGame();
     }
     
-    void Breakout::draw() {
-        the_game.draw();
-        SDL_Rect rc;
 
+    void Breakout::draw() {
+    	game::gfx::BlendImage(alpha, start::bg, game::front);
+    	the_game.draw();
+        SDL_Rect rc;
         for(unsigned int i = 0; i < Ball::MAX_BALL; ++i) {
 
         	if(the_game.ball[i].getActive() == false)
@@ -34,7 +36,6 @@ namespace breakout {
     
     void Breakout::update() {
         const unsigned char *keys = SDL_GetKeyboardState(NULL);
-        
         if(keys[SDL_SCANCODE_LEFT]) {
             the_game.player.move(Direction::LEFT);
         }
@@ -52,7 +53,6 @@ namespace breakout {
         }
         
         the_game.update();
-        
     }
     
     void Breakout::keydown(int key) {
@@ -91,7 +91,6 @@ namespace breakout {
     unsigned int Brick::getColor() {
     	return color;
     }
-
 
     Paddle::Paddle(int cx, int cy, int cw, int ch) : x(cx), y(cy), w(cw), h(ch) {
         
@@ -228,8 +227,6 @@ namespace breakout {
     }
 
     void Game::update() {
-
-
     	for(int x = 0; x < Grid::BRICK_W; ++x) {
     		for(int y = 0; y < Grid::BRICK_H; ++y) {
 
@@ -257,7 +254,6 @@ namespace breakout {
 
     		}
     	}
-
 
     	for(int i = 0; i < Ball::MAX_BALL; ++i) {
 
@@ -322,8 +318,8 @@ namespace breakout {
     				if(ball[i].d == 1 || ball[i].d == 3) ball[i].d++;
     				else if(ball[i].d == 2 || ball[i].d == 4) ball[i].d--;
     			}
-
     	}
 
     }
 }
+
