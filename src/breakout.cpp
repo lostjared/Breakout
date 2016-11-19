@@ -19,7 +19,7 @@ namespace breakout {
     
 
     void Breakout::draw() {
-    	game::gfx::BlendImage(alpha, start::bg, game::front);
+    	game::gfx::DirectionalBlend(alpha, start::bg, start::breakout1, game::front);
     	the_game.draw();
         SDL_Rect rc;
         for(unsigned int i = 0; i < Ball::MAX_BALL; ++i) {
@@ -38,10 +38,12 @@ namespace breakout {
         const unsigned char *keys = SDL_GetKeyboardState(NULL);
         if(keys[SDL_SCANCODE_LEFT]) {
             the_game.player.move(Direction::LEFT);
+            alpha += 0.05f;
         }
         
         if(keys[SDL_SCANCODE_RIGHT]) {
             the_game.player.move(Direction::RIGHT);
+            alpha -= 0.05f;
         }
         
         if(keys[SDL_SCANCODE_UP]) {

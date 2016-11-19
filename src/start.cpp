@@ -5,7 +5,7 @@ namespace start {
   
     Start game_start;
     TTF_Font *monaco;
-    SDL_Surface *bg;
+    SDL_Surface *bg, *breakout1;
 
     
     Start::~Start() {
@@ -30,7 +30,7 @@ namespace start {
         _start = game::LoadBMP(game::appPath("img/start.jpg"));
         about = game::LoadBMP(game::appPath("img/about.jpg"));
         _exit = game::LoadBMP(game::appPath("img/exit.jpg"));
-
+        breakout1 = game::LoadBMP(game::appPath("img/breakout1.png"));
         alpha = 0.0f;
         cursor_pos = 0;
 

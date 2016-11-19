@@ -52,7 +52,7 @@ namespace game {
         void FadeBlend(SDL_Surface *bmp1, SDL_Surface *dst, float alpha);
         void BlendWithFront(int x, int y, SDL_Surface *bmp1, SDL_Surface *dst, float alpha);
         void BlendImage(float &alpha, SDL_Surface *src, SDL_Surface *dst);
-        void DirectionalBlend(float &alpha, unsigned int &direction, SDL_Surface *src, SDL_Surface *dst);
+        void DirectionalBlend(float &alpha, SDL_Surface *src, SDL_Surface *src2, SDL_Surface *dst);
     }
 }
 

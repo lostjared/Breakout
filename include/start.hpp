@@ -6,7 +6,7 @@
 namespace start {
 
 	extern SDL_Surface *bg;
-
+	extern SDL_Surface *breakout1;
 
     class Start : public game::GameObject {
     public:
