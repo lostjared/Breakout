@@ -23,7 +23,7 @@ namespace breakout {
 
 	enum class Direction { LEFT, UP_LEFT, UP_RIGHT, RIGHT, DOWN_LEFT, DOWN_RIGHT, UP, DOWN };
 
-	enum { PADDLE_SPEED = 8 };
+	enum { PADDLE_SPEED = 10 };
 
 	class Paddle {
 	public:

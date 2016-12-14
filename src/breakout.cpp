@@ -32,6 +32,17 @@ namespace breakout {
         	rc.h = 10;
         	SDL_BlitSurface(ball, 0, game::front, &rc);
         }
+
+        static unsigned int direction = 1;
+
+        if(direction == 1) {
+        	alpha += 0.01f;
+        	if(alpha > 10) direction = 0;
+        } else if(direction == 0) {
+        	alpha -= 0.01f;
+        	if(alpha <= 1) direction = 1;
+        }
+
     }
     
     void Breakout::update() {
@@ -131,7 +142,7 @@ namespace breakout {
         rc->h = h;
     }
     
-    Ball::Ball() : x(1280/2), y(720/2), w(10), h(10), d(1), speed(4), active(false) {
+    Ball::Ball() : x(1280/2), y(720/2), w(10), h(10), d(1), speed(6), active(false) {
 
     }
     
@@ -274,7 +285,7 @@ namespace breakout {
     			}
     		}
     		else
-    			if(ball[i].d == 1 && ball[i].x > 5 && ball[i].y > 5) {
+    			if(ball[i].d == 1 && ball[i].x > 0 && ball[i].y > 0) {
     				if(ball[i].x < 10) {
     					ball[i].d = 3;
     				}
@@ -283,7 +294,7 @@ namespace breakout {
     					ball[i].y -= ball[i].speed;
     				}
 
-    			} else if(ball[i].d == 2 && ball[i].x > 5 && ball[i].y < 710) {
+    			} else if(ball[i].d == 2 && ball[i].x > 0 && ball[i].y < 720) {
 
     				if(ball[i].x < 10) {
     					ball[i].d = 4;
@@ -291,7 +302,7 @@ namespace breakout {
     					ball[i].x -= ball[i].speed;
     					ball[i].y += ball[i].speed;
     				}
-    			} else if(ball[i].d == 3 && ball[i].x < 1270 && ball[i].y > 10) {
+    			} else if(ball[i].d == 3 && ball[i].x < 1270 && ball[i].y > 0) {
 
     				if(ball[i].x > 1260)
     					ball[i].d = 1;
@@ -299,8 +310,8 @@ namespace breakout {
     					ball[i].x += ball[i].speed;
     					ball[i].y -= ball[i].speed;
     				}
-    			} else if(ball[i].d == 4 && ball[i].x < 1270 && ball[i].y < 710)  {
-    				if(ball[i].x > 1260) {
+    			} else if(ball[i].d == 4 && ball[i].x < 1270 && ball[i].y < 720)  {
+    				if(ball[i].x > 1270) {
     					ball[i].d = 2;
     				}
     				else {
@@ -316,7 +327,6 @@ namespace breakout {
     						// game over
     					}
     				}
-
     				if(ball[i].d == 1 || ball[i].d == 3) ball[i].d++;
     				else if(ball[i].d == 2 || ball[i].d == 4) ball[i].d--;
     			}

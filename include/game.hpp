@@ -2,7 +2,7 @@
 #define __GAME__H_
 
 // so i don't have to watch the intro a million times
-//#define DEBUG_MODE
+#define DEBUG_MODE
 
 #include "SDL.h"
 #include "SDL_ttf.h"
@@ -55,10 +55,5 @@ namespace game {
         void DirectionalBlend(float &alpha, SDL_Surface *src, SDL_Surface *src2, SDL_Surface *dst);
     }
 }
-
-
-
-
-
 
 #endif

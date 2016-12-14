@@ -1,5 +1,6 @@
 
 #include "game.hpp"
+#include "breakout.hpp"
 
 namespace game {
     
@@ -29,7 +30,7 @@ namespace game {
         SDL_Rect dst = { 0,0,width,height };
         SDL_RenderCopy(render, tex, 0, &dst);
         SDL_RenderPresent(render);
-        //SDL_Delay(5);
+        SDL_Delay(12);
     }
     
     void keydown_game(int key) {
