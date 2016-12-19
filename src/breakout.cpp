@@ -275,6 +275,14 @@ namespace breakout {
     		if(ball[i].getActive() == false)
     			continue;
 
+    		if(ball[i].y > 705) {
+    	    	ball[i].setActive(false);
+    	    	--lives;
+    	    	if(lives <= 0) {
+    	    		// game over
+    	    	}
+    	    	releaseBall();
+    	   	} else
     		if(ball[i].x >= player.x && ball[i].y >= player.y && ball[i].x <= player.x+player.w && ball[i].y <= player.y+player.h) {
     			if(ball[i].x >= player.x && ball[i].x <= (player.x+(player.w/2))) {
     				ball[i].d = 1;
@@ -319,14 +327,6 @@ namespace breakout {
     					ball[i].y += ball[i].speed;
     				}
     			} else {
-
-    				if(ball[i].y > 705) {
-    					ball[i].setActive(false);
-    					--lives;
-    					if(lives <= 0) {
-    						// game over
-    					}
-    				}
     				if(ball[i].d == 1 || ball[i].d == 3) ball[i].d++;
     				else if(ball[i].d == 2 || ball[i].d == 4) ball[i].d--;
     			}
