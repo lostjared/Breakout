@@ -19,8 +19,8 @@ namespace breakout {
     
 
     void Breakout::draw() {
-    	game::gfx::DirectionalBlend(alpha, start::bg, start::breakout1, game::front);
-    	//SDL_FillRect(game::front, 0, 0);
+    	//game::gfx::DirectionalBlend(alpha, start::bg, start::breakout1, game::front);
+    	SDL_FillRect(game::front, 0, 0);
     	the_game.draw();
         SDL_Rect rc;
         for(unsigned int i = 0; i < Ball::MAX_BALL; ++i) {
@@ -143,7 +143,7 @@ namespace breakout {
         rc->h = h;
     }
     
-    Ball::Ball() : x(1280/2), y(720/2), w(10), h(10), d(1), speed(6), active(false) {
+    Ball::Ball() : x(1280/2), y(720/2), w(10), h(10), d(1), speed(4), active(false) {
 
     }
     
@@ -241,11 +241,6 @@ namespace breakout {
     }
 
     void Game::update() {
-    	static unsigned int timeout = SDL_GetTicks();
-    	int cur_time = SDL_GetTicks();
-    	if(cur_time-timeout > 5) {
-    		timeout = SDL_GetTicks();
-    	} else return;
 
     	for(int x = 0; x < Grid::BRICK_W; ++x) {
     		for(int y = 0; y < Grid::BRICK_H; ++y) {
