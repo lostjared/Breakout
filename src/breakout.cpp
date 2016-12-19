@@ -20,6 +20,7 @@ namespace breakout {
 
     void Breakout::draw() {
     	game::gfx::DirectionalBlend(alpha, start::bg, start::breakout1, game::front);
+    	//SDL_FillRect(game::front, 0, 0);
     	the_game.draw();
         SDL_Rect rc;
         for(unsigned int i = 0; i < Ball::MAX_BALL; ++i) {
@@ -240,6 +241,12 @@ namespace breakout {
     }
 
     void Game::update() {
+    	static unsigned int timeout = SDL_GetTicks();
+    	int cur_time = SDL_GetTicks();
+    	if(cur_time-timeout > 5) {
+    		timeout = SDL_GetTicks();
+    	} else return;
+
     	for(int x = 0; x < Grid::BRICK_W; ++x) {
     		for(int y = 0; y < Grid::BRICK_H; ++y) {
 
@@ -275,17 +282,15 @@ namespace breakout {
 
     		if(ball[i].x >= player.x && ball[i].y >= player.y && ball[i].x <= player.x+player.w && ball[i].y <= player.y+player.h) {
     			if(ball[i].x >= player.x && ball[i].x <= (player.x+(player.w/2))) {
-    				//ball[i].d = ((rand()%2) == 0) ? 1 : 3;
     				ball[i].d = 1;
     				ball[i].y -= ball[i].speed;
     			} else {
     				ball[i].d = 3;
-    				//ball[i].d = ((rand()%2) == 0) ? 3 : 1;
     				ball[i].y -= ball[i].speed;
     			}
     		}
     		else
-    			if(ball[i].d == 1 && ball[i].x > 0 && ball[i].y > 0) {
+    			if(ball[i].d == 1) {
     				if(ball[i].x < 10) {
     					ball[i].d = 3;
     				}
@@ -294,7 +299,7 @@ namespace breakout {
     					ball[i].y -= ball[i].speed;
     				}
 
-    			} else if(ball[i].d == 2 && ball[i].x > 0 && ball[i].y < 720) {
+    			} else if(ball[i].d == 2) {
 
     				if(ball[i].x < 10) {
     					ball[i].d = 4;
@@ -302,7 +307,7 @@ namespace breakout {
     					ball[i].x -= ball[i].speed;
     					ball[i].y += ball[i].speed;
     				}
-    			} else if(ball[i].d == 3 && ball[i].x < 1270 && ball[i].y > 0) {
+    			} else if(ball[i].d == 3) {
 
     				if(ball[i].x > 1260)
     					ball[i].d = 1;
@@ -310,7 +315,7 @@ namespace breakout {
     					ball[i].x += ball[i].speed;
     					ball[i].y -= ball[i].speed;
     				}
-    			} else if(ball[i].d == 4 && ball[i].x < 1270 && ball[i].y < 720)  {
+    			} else if(ball[i].d == 4)  {
     				if(ball[i].x > 1270) {
     					ball[i].d = 2;
     				}
