@@ -224,6 +224,7 @@ namespace breakout {
     }
 
     void Game::draw() {
+    	SDL_Delay(5);
         SDL_Rect rc;
         player.setRect(&rc);
         SDL_FillRect(game::front, &rc, white);
@@ -242,31 +243,30 @@ namespace breakout {
 
     void Game::update() {
 
+    	static unsigned int t = SDL_GetTicks();
+    	int ti = SDL_GetTicks();
+    	if(ti-t > 16) {
+    		t = SDL_GetTicks();
+    	} else return;
+
     	for(int x = 0; x < Grid::BRICK_W; ++x) {
     		for(int y = 0; y < Grid::BRICK_H; ++y) {
-
     			int cx = x*Grid::BRICK_SIZE_W+3;
     			int cy = y*Grid::BRICK_SIZE_H+3;
     			int cw = Grid::BRICK_SIZE_W-3;
     			int ch = (Grid::BRICK_SIZE_H-3);
-
     			SDL_Rect rc1 = {cx,cy,cw,ch};
-
-
     			for(int q = 0; q < Ball::MAX_BALL; ++q) {
     				if(ball[q].getActive() == false)
     					continue;
 
     				SDL_Rect rc2 = {ball[q].x, ball[q].y, ball[q].w, ball[q].h};
-
     				if( (grid.bricks[x][y].isVisible() && rc1.x < rc2.x + rc2.w) && (rc1.y < rc2.y + rc2.h) && (rc2.x < rc1.x + rc1.w) && (rc2.y < rc1.y + rc1.h)) {
     					grid.bricks[x][y].setVisible(false);
     					score += 10;
     					ball[q].d = (rc2.x > rc1.x+(rc1.w/2)) ? 4 : 2;
     				}
     			}
-
-
     		}
     	}
 
