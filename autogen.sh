@@ -2,5 +2,5 @@
 
 
 autoreconf -i
-echo "done, you can now run configure""
+echo "done, you can now run configure"
 
