@@ -287,6 +287,7 @@ namespace breakout {
     	    	--lives;
     	    	if(lives <= 0) {
     	    		// game over
+    	    		setScreen(&start::game_over);
     	    	}
     	    	releaseBall();
     	   	} else

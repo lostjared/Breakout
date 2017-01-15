@@ -24,7 +24,19 @@ namespace start {
         int cursor_pos;
     };
 
+    class GameOver : public game::GameObject {
+    public:
+    	virtual ~GameOver();
+    	virtual void loadData();
+    	virtual void draw();
+    	virtual void update();
+    	virtual void keydown(int key);
+    	virtual void keyup(int key);
+
+    };
+
     extern Start game_start;
+    extern GameOver game_over;
     extern TTF_Font *monaco;
 }
 

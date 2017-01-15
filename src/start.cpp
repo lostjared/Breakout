@@ -4,6 +4,7 @@
 namespace start {
   
     Start game_start;
+    GameOver game_over;
     TTF_Font *monaco;
     SDL_Surface *bg, *breakout1;
 
@@ -128,4 +129,29 @@ namespace start {
     void Start::keyup(int key) {
         
     }
+
+    GameOver::~GameOver() {
+
+    }
+
+    void GameOver::loadData() {
+
+    }
+
+    void GameOver::draw() {
+    	SDL_FillRect(game::front, 0, 0);
+    }
+
+    void GameOver::update() {
+
+    }
+
+    void GameOver::keydown(int key) {
+
+    }
+
+    void GameOver::keyup(int key) {
+
+    }
+
 }

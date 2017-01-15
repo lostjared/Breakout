@@ -133,6 +133,7 @@ void Init(int width, int height) {
     intro::game_intro.loadData();
     breakout::game_breakout.loadData();
     start::game_start.loadData();
+    start::game_over.loadData();
 }
 
 
