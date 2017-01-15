@@ -1,6 +1,6 @@
 #include "breakout.hpp"
 #include "start.hpp"
-
+#include<sstream>
 namespace breakout {
     
     Breakout game_breakout;
@@ -239,6 +239,13 @@ namespace breakout {
         			SDL_FillRect(game::front, &rc, grid.bricks[i][z].color);
         	}
         }
+        std::ostringstream stream;
+        stream << "Lives: " << lives;
+        SDL_Color col = {255,255,255};
+        SDL_Surface *text = TTF_RenderText_Solid(game::game_font, stream.str().c_str(), col);
+        SDL_Rect pos = { 50, 50, text->w, text->h };
+        SDL_BlitSurface(text, 0, game::front, &pos);
+        SDL_FreeSurface(text);
     }
 
     void Game::update() {
