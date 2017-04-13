@@ -1,5 +1,6 @@
 # Breakout
-Have not had much time to work on this lately.
+Have not worked on this project in a while
+I will probably get around to it eventually got bored with it.
 Hopefully I will get back to work on it soon.
 This is a work in progress going to be a
 Simple 2D Game written in C++ using SDL2 
